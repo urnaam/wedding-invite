@@ -1,0 +1,30 @@
+// Prisma schema for wedding RSVP data.
+// Works with PostgreSQL (recommended: Supabase, Neon, or Vercel Postgres).
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guest {
+  id            String         @id @default(cuid())
+  slug          String         @unique // used in the personal invite link, e.g. /rsvp/bat-tsetseg
+  displayName   String         // name shown on the invite, e.g. "Bat & Tsetseg family"
+  language      String         @default("mn") // mn | en | ja - which language to greet them in
+  status        String         @default("pending") // pending | attending | not_attending
+  message       String?        // well-wishes message, mainly used when not attending
+  respondedAt   DateTime?
+  createdAt     DateTime       @default(now())
+  members       FamilyMember[]
+}
+
+model FamilyMember {
+  id        String  @id @default(cuid())
+  guestId   String
+  guest     Guest   @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  name      String
+  attending Boolean @default(true)
+}
