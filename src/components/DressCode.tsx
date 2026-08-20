@@ -1,41 +1,244 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { wedding } from "@/config/wedding";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { wedding } from '@/config/wedding';
+import { useLanguage } from '@/i18n/LanguageContext';
 
-const swatches = [
-  wedding.colors.navy,
-  wedding.colors.navyLight,
-  wedding.colors.burgundy,
-  wedding.colors.sage,
-  wedding.colors.ivory,
+// ЗОЧДОД ЗОРИУЛСАН ШИНЭ ПАЛИТР (Цагаан өнгөнөөс 100% хол, таны заасан тод дулаан өнгөнүүд)
+const guestSwatches = [
+  {
+    color: '#B89047',
+    labelMn: 'Golden Accent (Алтан шаргал өнгө)',
+    labelEn: 'Golden Accent',
+  },
+  {
+    color: '#8B7D6B',
+    labelMn: 'Warm Taupe (Гүн дулаан тауп саарал)',
+    labelEn: 'Warm Taupe',
+  },
+  {
+    color: '#A66E65',
+    labelMn: 'Dusty Cedar (Гүн намуун тоосгон ягаан)',
+    labelEn: 'Dusty Cedar',
+  },
+  {
+    color: '#637280',
+    labelMn: 'Muted Slate (Даруухан ган саарал)',
+    labelEn: 'Muted Slate',
+  },
+];
+
+// ГЭРЧҮҮДЭД ЗОРИУЛСАН СҮҮДЭРТҮҮД
+const partySwatches = [
+  {
+    color: wedding.colors.sage,
+    labelMn: 'Sage Green (Гэрч эмэгтэй даашинз)',
+    labelEn: 'Sage Green (Bridesmaids)',
+  },
+  {
+    color: wedding.colors.navy,
+    labelMn: 'Navy Blue (Гэрч эрэгтэй хослол)',
+    labelEn: 'Navy Blue (Groomsmen)',
+  },
+  {
+    color: wedding.colors.burgundy,
+    labelMn: 'Burgundy Accent (Эрвээхэй зангиа)',
+    labelEn: 'Burgundy Accent (Bowties)',
+  },
 ];
 
 export default function DressCode() {
-  return (
-    <section className="mx-auto max-w-2xl px-6 py-24 text-center">
-      <p className="divider-flourish font-body text-xs uppercase tracking-[0.35em] text-gold">
-        <span>Хувцасны өнгө</span>
-      </p>
-      <h2 className="mt-4 font-display text-4xl italic text-ivory">Dress Code</h2>
+  const { t, lang } = useLanguage();
+  const [activeTab, setActiveTab] = useState('guests'); // "guests" эсвэл "party"
 
-      <div className="mt-8 flex justify-center gap-3">
-        {swatches.map((c, i) => (
-          <motion.span
-            key={c}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="h-10 w-10 rounded-full border border-white/20 sm:h-14 sm:w-14"
-            style={{ backgroundColor: c }}
-          />
-        ))}
+  // Идэвхтэй табаас хамаарч өнгөний жагсаалтыг сонгох
+  const currentSwatches =
+    activeTab === 'guests' ? guestSwatches : partySwatches;
+
+  return (
+    <section className="mx-auto max-w-4xl px-6 py-24 text-center bg-[#1B2A4A] text-[#F6F1EA]">
+      {/* Дээд талын хээ чимэглэл */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="divider-flourish font-body text-xs uppercase tracking-[0.35em] text-[#C9A227]"
+      >
+        <span>{t('dressCodeLabel')}</span>
+      </motion.p>
+
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-4 font-display text-4xl italic text-[#F6F1EA] sm:text-5xl"
+      >
+        {t('dressCodeTitle')}
+      </motion.h2>
+
+      {/* АНГИЛАЛ СОНГОХ ТАБ (TABS) */}
+      <div className="mt-12 flex justify-center border-b border-white/10 max-w-md mx-auto">
+        <button
+          onClick={() => setActiveTab('guests')}
+          className={`px-6 py-3 text-xs uppercase tracking-widest font-medium transition-all relative cursor-pointer focus:outline-none ${
+            activeTab === 'guests'
+              ? 'text-[#C9A227]'
+              : 'text-[#F6F1EA]/50 hover:text-[#F6F1EA]'
+          }`}
+        >
+          {t('weddingGuest')}
+          {activeTab === 'guests' && (
+            <motion.div
+              layoutId="activeTabLine"
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C9A227]"
+            />
+          )}
+        </button>
+        <button
+          onClick={() => setActiveTab('party')}
+          className={`px-6 py-3 text-xs uppercase tracking-widest font-medium transition-all relative cursor-pointer focus:outline-none ${
+            activeTab === 'party'
+              ? 'text-[#C9A227]'
+              : 'text-[#F6F1EA]/50 hover:text-[#F6F1EA]'
+          }`}
+        >
+          {t('weddingParty')}
+          {activeTab === 'party' && (
+            <motion.div
+              layoutId="activeTabLine"
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C9A227]"
+            />
+          )}
+        </button>
       </div>
 
-      <p className="mx-auto mt-8 max-w-md text-sm leading-relaxed text-ivory/80">
-        {wedding.dressCode.mn}
-      </p>
+      {/* ДИНАМИК ПАЛИТР ХЭСЭГ */}
+      <div className="mt-10 flex flex-col items-center justify-center min-h-[110px]">
+        <p className="text-[11px] uppercase tracking-[0.2em] text-[#F6F1EA]/50 mb-4 h-4">
+          {activeTab === 'guests' ? t('suggestedColors') : t('weddingColors')}
+        </p>
+
+        <div className="flex justify-center gap-3 sm:gap-4 h-16 items-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35 }}
+              className="flex justify-center gap-3 sm:gap-4"
+            >
+              {currentSwatches.map((swatch, i) => (
+                <motion.div
+                  key={swatch.color}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    delay: i * 0.05,
+                    type: 'spring',
+                    stiffness: 150,
+                  }}
+                  className="group relative h-12 w-12 rounded-full border border-white/20 shadow-lg flex items-center justify-center cursor-help"
+                  style={{ backgroundColor: swatch.color }}
+                  whileHover={{ scale: 1.12, y: -5 }}
+                >
+                  {/* Tooltip тайлбар бичвэр */}
+                  <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap scale-0 rounded bg-[#142038] px-3 py-1.5 text-[10px] text-[#F6F1EA] group-hover:scale-100 transition-all shadow-md border border-white/10 z-50 tracking-wide font-light">
+                    {lang === 'mn' ? swatch.labelMn : swatch.labelEn}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ТАЙЛБАР ТЕКСТ ХЭСЭГ */}
+      <div className="mt-4 max-w-3xl mx-auto min-h-[160px]">
+        <AnimatePresence mode="wait">
+          {activeTab === 'guests' ? (
+            <motion.div
+              key="guests-strict-exclusion"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left"
+            >
+              {/* ЭМЭГТЭЙ ЗОЧИД */}
+              <div className="p-6 rounded-2xl border border-white/5 bg-[#142038]/40 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xl">✨</span>
+                  <h3 className="font-display text-2xl italic text-[#C9A227]">
+                    {t('ladiesGuide')}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed text-[#F6F1EA]/80 font-light">
+                  {t('ladiesDressCode')}
+                </p>
+              </div>
+
+              {/* ЭРЭГТЭЙ ЗОЧИД */}
+              <div className="p-6 rounded-2xl border border-white/5 bg-[#142038]/40 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xl">🤵</span>
+                  <h3 className="font-display text-2xl italic text-[#C9A227]">
+                    {t('gentlemenGuide')}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed text-[#F6F1EA]/80 font-light">
+                  {t('gentlemenDressCode')}
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="party-text-content"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left"
+            >
+              {/* BRIDESMAIDS (БҮСГҮЙН ГЭРЧҮҮД) */}
+              <div className="p-6 rounded-2xl border border-[#C9A227]/20 bg-[#142038]/60 shadow-md">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xl">🌸</span>
+                  <h3 className="font-display text-2xl italic text-[#C9A227]">
+                    {t('bridesmaids')}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed text-[#F6F1EA]/90 font-light">
+                  {t('bridesmaidsDressCode')}
+                </p>
+              </div>
+
+              {/* GROOMSMEN (ЗАЛУУГИЙН ГЭРЧҮҮД) */}
+              <div className="p-6 rounded-2xl border border-[#C9A227]/20 bg-[#142038]/60 shadow-md">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xl">🎩</span>
+                  <h3 className="font-display text-2xl italic text-[#C9A227]">
+                    {t('groomsmen')}
+                  </h3>
+                </div>
+                <p className="text-sm leading-relaxed text-[#F6F1EA]/90 font-light">
+                  {t('groomsmenAttire')}
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Доод талын туслах тайлбар */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.8 }}
+        className="mx-auto mt-10 max-w-md text-xs leading-relaxed text-[#F6F1EA]/60 italic font-light"
+      >
+        {t('dressCodeText')}
+      </motion.p>
     </section>
   );
 }

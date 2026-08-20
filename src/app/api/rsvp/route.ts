@@ -1,27 +1,38 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
 // POST /api/rsvp
-// body: { slug: string, attending: boolean, members: {id: string, attending: boolean}[], message?: string }
+// body: { slug, attending, members: {id, attending}[], message?, dietaryNotes?, needsTransport? }
 export async function POST(req: Request) {
   const body = await req.json();
-  const { slug, attending, members, message } = body ?? {};
+  const {
+    slug,
+    attending,
+    members,
+    message,
+    dietaryNotes,
+    needsTransport,
+    wantsAccommodation,
+  } = body ?? {};
 
-  if (!slug || typeof attending !== "boolean") {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  if (!slug || typeof attending !== 'boolean') {
+    return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
 
   const guest = await prisma.guest.findUnique({ where: { slug } });
   if (!guest) {
-    return NextResponse.json({ error: "Guest not found" }, { status: 404 });
+    return NextResponse.json({ error: 'Guest not found' }, { status: 404 });
   }
 
   await prisma.$transaction(async (tx) => {
     await tx.guest.update({
       where: { slug },
       data: {
-        status: attending ? "attending" : "not_attending",
+        status: attending ? 'attending' : 'not_attending',
         message: message ?? null,
+        dietaryNotes: attending ? (dietaryNotes ?? null) : null,
+        needsTransport: attending ? !!needsTransport : null,
+        needsAccommodation: attending ? !!wantsAccommodation : null,
         respondedAt: new Date(),
       },
     });

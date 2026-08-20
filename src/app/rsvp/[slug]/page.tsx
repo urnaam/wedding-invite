@@ -1,9 +1,21 @@
-import RsvpForm from "@/components/RsvpForm";
+import { prisma } from '@/lib/prisma';
+import SiteExperience from '@/components/SiteExperience';
 
-export default function RsvpPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: { slug: string };
+}
+
+export default async function Page({ params }: PageProps) {
+  const cleanSlug = params.slug.toLowerCase();
+
+  const guest = await prisma.guest.findUnique({
+    where: { slug: cleanSlug },
+  });
+
   return (
-    <main className="min-h-screen bg-navy px-6 py-24">
-      <RsvpForm slug={params.slug} />
-    </main>
+    <SiteExperience
+      slug={cleanSlug}
+      initialLang={guest?.language || undefined}
+    />
   );
 }

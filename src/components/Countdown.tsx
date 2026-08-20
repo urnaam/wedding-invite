@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { wedding, googleCalendarUrl } from "@/config/wedding";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { wedding, googleCalendarUrl } from '@/config/wedding';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 function getRemaining() {
   const diff = new Date(wedding.dateTimeISO).getTime() - Date.now();
@@ -16,18 +17,19 @@ function getRemaining() {
 }
 
 export default function Countdown() {
-  const [t, setT] = useState(getRemaining());
+  const [t2, setT2] = useState(getRemaining());
+  const { t } = useLanguage();
 
   useEffect(() => {
-    const id = setInterval(() => setT(getRemaining()), 1000);
+    const id = setInterval(() => setT2(getRemaining()), 1000);
     return () => clearInterval(id);
   }, []);
 
   const units: [string, number][] = [
-    ["өдөр", t.days],
-    ["цаг", t.hours],
-    ["минут", t.minutes],
-    ["секунд", t.seconds],
+    [t('days'), t2.days],
+    [t('hours'), t2.hours],
+    [t('minutes'), t2.minutes],
+    [t('seconds'), t2.seconds],
   ];
 
   return (
@@ -42,7 +44,7 @@ export default function Countdown() {
         {units.map(([label, value]) => (
           <div key={label} className="flex flex-col items-center">
             <span className="font-display text-4xl text-gold sm:text-6xl">
-              {String(value).padStart(2, "0")}
+              {String(value).padStart(2, '0')}
             </span>
             <span className="mt-1 text-[10px] uppercase tracking-[0.2em] text-ivory/70 sm:text-xs">
               {label}
@@ -63,7 +65,7 @@ export default function Countdown() {
         whileTap={{ scale: 0.97 }}
         className="mt-10 rounded-full border border-gold/60 px-6 py-3 font-body text-sm uppercase tracking-[0.15em] text-ivory transition-colors hover:bg-gold hover:text-navy"
       >
-        Google Calendar-т нэмэх
+        {t('addToCalendar')}
       </motion.a>
     </section>
   );
