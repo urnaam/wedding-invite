@@ -49,7 +49,7 @@ const script = Great_Vibes({
   variable: '--font-script',
 });
 export const metadata: Metadata = {
-  title: 'Урнаагийн хуримын урилга',
+  title: 'Wedding invitation',
   description: 'Wedding invitation & RSVP',
 };
 export default function RootLayout({
