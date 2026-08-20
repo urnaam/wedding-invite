@@ -400,13 +400,163 @@ async function main() {
 
   await prisma.guest.create({
     data: {
-      slug: 'ly',
-      displayName: 'Ly',
+      slug: 'thai',
+      displayName: 'Thai Caroline',
       language: 'yue',
       side: 'groom',
       members: {
-        create: [{ name: 'Thai' }],
+        create: [{ name: 'Ly Vinh Mau' }],
       },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'celine',
+      displayName: 'Fourrier Celine',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [
+          { name: 'Fourrier Jason' },
+          { name: 'Fourrier Jenny', isChild: true },
+          { name: 'Fourrier Kelly', isChild: true },
+          { name: 'Fourrier Tiffany', isChild: true },
+        ],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'valentin',
+      displayName: 'Ly Valentin',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [
+          { name: 'Rosa Marine ' },
+          { name: 'Ly Erwann', isChild: true },
+        ],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'christian',
+      displayName: 'Wong Christian',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [
+          { name: 'Wong Adeline' },
+          { name: 'Wong Christine' },
+          { name: 'Wong Daniel' },
+        ],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'jonathan',
+      displayName: 'Ma Jonathan',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [
+          { name: 'Ma Valentine' },
+          { name: 'Ma Alexis' },
+          { name: 'Ma Jordy' },
+          { name: 'Ma Melainie' },
+          { name: 'Ma Pauline' },
+        ],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'paul',
+      displayName: 'Thai Paul',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [{ name: 'Thai Jema ' }],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'antoine',
+      displayName: 'Thai Antoine',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [
+          { name: 'Thai Leang' },
+          { name: 'Thai Ambre' },
+          { name: 'Thai Benjamin' },
+        ],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'quentin',
+      displayName: 'Ordan Quentin',
+      language: 'fr',
+      side: 'groom',
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'arthur',
+      displayName: 'Coin Arthur',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [{ name: 'Belda Romane' }],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'yanis',
+      displayName: 'Abid Charef Yanis',
+      language: 'fr',
+      side: 'groom',
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'julien',
+      displayName: 'Francois Julien',
+      language: 'fr',
+      side: 'groom',
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'paulin',
+      displayName: 'Montabert Paulin',
+      language: 'fr',
+      side: 'groom',
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'konstatina',
+      displayName: 'Topka Konstantina',
+      language: 'fr',
+      side: 'groom',
+      members: {
+        create: [{ name: 'Grao Matthieu' }],
+      },
+    },
+  });
+  await prisma.guest.create({
+    data: {
+      slug: 'mathilde',
+      displayName: 'Lefebvre Mathilde',
+      language: 'fr',
+      side: 'groom',
     },
   });
 }
