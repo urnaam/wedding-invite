@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
 // GET /api/admin/export — CSV of every guest + their family members' answers.
 export async function GET() {
   if (cookies().get('admin_auth')?.value !== '1') {
