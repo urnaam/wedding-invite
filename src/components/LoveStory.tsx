@@ -5,45 +5,30 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 export default function StorySection() {
-  const { lang } = useLanguage();
+  const { t, lang } = useLanguage();
 
   // Хайрын түүхийн өгөгдөл (Зургийн замууд таны public/images/ хавтаснаас уншигдана)
   const timelineEvents = [
     {
       id: 1,
-      dateMn: '2022 оны 10-р сар',
-      dateEn: 'October 2022',
-      titleMn: 'Анхны уулзалт 🌟',
-      titleEn: 'First Meeting 🌟',
-      textMn:
-        'Бидний түүх анх олны хөл хөдөлгөөн ихтэй намрын нэгэн өдөр эхэлсэн юм. Анхны харцаар бие биедээ татагдаж, цаг хугацаа зогсох шиг л санагдаж билээ. Тэр өдрөөс хойш бид сая сая дурсамжуудыг хамтдаа бүтээж эхэлсэн.',
-      textEn:
-        'Our story began on a bustling autumn day. It was love at first sight, a moment where time seemed to stand still. Since that day, we have been building a lifetime of beautiful memories together.',
-      imgUrl: '/images/story-first-meet.jpeg',
+      date: 'firstMeetingDate',
+      title: 'firstMeeting',
+      text: 'firstMeetingDesc',
+      imgUrl: '/firstmeet.jpg',
     },
     {
       id: 2,
-      dateMn: '2024 оны 05-р сар',
-      dateEn: 'May 2024',
-      titleMn: 'Хамтын аялал ✈️',
-      titleEn: 'Our Journeys ✈️',
-      textMn:
-        'Аялал бол бидний хайрыг улам бат бөх болгосон нандин гүүр юм. Шинэ газруудтай танилцаж, хамтдаа хөтлөлцөн алхсан алхам бүр маань биднийг нэгэн цул, салшгүй нэгэн болгож өгсөн билээ.',
-      textEn:
-        'Traveling became the bridge that strengthened our bond. Discovering new places and walking hand in hand through every milestone made us inseparable, creating a beautiful foundation for our future.',
-      imgUrl: '/images/story-travel.jpeg',
+      date: 'ourJourneysDate',
+      title: 'ourJourneys',
+      text: `ourJourneysDesc`,
+      imgUrl: '/journey.jpg',
     },
     {
       id: 3,
-      dateMn: '2026 оны 02-р сар',
-      dateEn: 'February 2026',
-      titleMn: 'Тийм гэж хэлсэн мөч 💍',
-      titleEn: 'The Proposal 💍',
-      textMn:
-        "Хамгийн нандин, мартагдашгүй мөч. Хайртай хүнийхээ гэрлэх саналыг сонсоод, ирээдүйн амьдралаа хамтдаа туулах бат итгэлтэйгээр 'Тийм' гэж хариулсан тэр агшин бидний амьдралын шинэ хуудсыг нээсэн юм.",
-      textEn:
-        "The most magical moment of our lives. Hearing the question and answering with a definitive 'Yes' to spending forever together opened a beautiful new chapter in our love story.",
-      imgUrl: '/images/story-proposal.jpeg',
+      date: 'proposalDate',
+      title: 'proposal',
+      text: 'proposalDesc',
+      imgUrl: '/proposal.jpg',
     },
   ];
 
@@ -89,19 +74,88 @@ export default function StorySection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.8 }}
-                  className="w-full md:w-[46%] aspect-[4/3] sm:aspect-[16/10] bg-[#142038]/60 border border-[#C9A227]/20 rounded-2xl overflow-hidden shadow-lg relative group"
+                  /* Great Gatsby Art Deco тэгш өнцөгт жааз ба гүн сүүдэр */
+                  className="w-full md:w-[46%] aspect-[4/3] sm:aspect-[16/10] bg-[#0c1322] border-2 border-[#C9A227]/60 p-3 sm:p-4 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_15px_rgba(201,162,39,0.15)]"
                 >
-                  <img
-                    src={event.imgUrl}
-                    alt={lang === 'mn' ? event.titleMn : event.titleEn}
-                    className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                  />
-                  {/* 
-                    ЗАСАЛТ: Огноог бичвэр дээр давхардуулахгүй байх үүднээс 
-                    зургийн зүүн дээд буланд маш чамин рамтайгаар absolute байрлуулж бэхлэв.
-                  */}
-                  <div className="absolute top-3 left-3 bg-[#121d33]/90 text-[#C9A227] text-[10px] sm:text-xs font-medium uppercase tracking-widest px-3 py-1.5 rounded border border-[#C9A227]/30 shadow-md font-sans-clean">
-                    {lang === 'mn' ? event.dateMn : event.dateEn}
+                  {/* Дотор талын давхар Art Deco нарийхан алтан шугамууд */}
+                  <div className="absolute inset-1.5 border border-[#C9A227]/30 pointer-events-none z-20" />
+                  <div className="absolute inset-2.5 border border-[#C9A227]/15 pointer-events-none z-20" />
+
+                  {/* Art Deco Булангийн геометрийн хурц өнцөгт алтан хээнүүд */}
+                  {[
+                    { align: 'top-1 left-1', transform: '' },
+                    { align: 'top-1 right-1', transform: 'scaleX(-1)' },
+                    { align: 'bottom-1 left-1', transform: 'scaleY(-1)' },
+                    { align: 'bottom-1 right-1', transform: 'scale(-1, -1)' },
+                  ].map((item, index) => (
+                    <svg
+                      key={index}
+                      className={`absolute w-7 h-7 sm:w-10 sm:h-10 stroke-[#C9A227] fill-none stroke-[1.2] z-30 pointer-events-none ${item.align}`}
+                      style={{ transform: item.transform }}
+                      viewBox="0 0 50 50"
+                    >
+                      <path
+                        d="M 0,0 L 20,0 L 20,4 L 4,4 L 4,20 L 0,20 Z"
+                        className="fill-[#C9A227]/30 stroke-none"
+                      />
+                      <path d="M 0,0 L 32,0 L 32,2 L 2,2 L 2,32 L 0,32 Z" />
+                      <path d="M 8,8 L 24,8 L 24,10 L 10,10 L 10,24 L 8,24 Z" />
+                      <polygon
+                        points="18,18 24,12 18,6 12,12"
+                        className="fill-[#C9A227]/50 stroke-none"
+                      />
+                      <circle
+                        cx="18"
+                        cy="18"
+                        r="1.5"
+                        className="fill-[#C9A227] stroke-none"
+                      />
+                    </svg>
+                  ))}
+
+                  {/* Дээд ба Доод талын Төв Art Deco Чимэглэл (Gatsby Crown Ornament) */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                    <svg
+                      className="w-16 h-4 sm:w-20 sm:h-5 stroke-[#C9A227] fill-none stroke-[1]"
+                      viewBox="0 0 100 25"
+                    >
+                      <path d="M 0,0 L 35,0 L 50,15 L 65,0 L 100,0" />
+                      <polygon
+                        points="50,4 57,13 50,22 43,13"
+                        className="fill-[#C9A227]/30 stroke-[#C9A227]"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+                    <svg
+                      className="w-16 h-4 sm:w-20 sm:h-5 stroke-[#C9A227] fill-none stroke-[1]"
+                      viewBox="0 0 100 25"
+                    >
+                      <path d="M 0,25 L 35,25 L 50,10 L 65,25 L 100,25" />
+                      <polygon
+                        points="50,21 57,12 50,3 43,12"
+                        className="fill-[#C9A227]/30 stroke-[#C9A227]"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Зургийн контейнер */}
+                  <div className="w-full h-full relative overflow-hidden bg-[#090e1a]">
+                    {/* Дотоод сүүдэр */}
+                    <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.85)] z-10 pointer-events-none" />
+
+                    {/* Зураг */}
+                    <img
+                      src={event.imgUrl}
+                      alt={t(event.title)}
+                      className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-104 transition-all duration-700 ease-out"
+                    />
+                  </div>
+
+                  {/* Огнооны хүрээ (Gatsby хэв маягийн хурц өнцөгтэй) */}
+                  <div className="absolute top-5 left-5 bg-[#121d33]/90 text-[#C9A227] text-[10px] sm:text-xs font-medium uppercase tracking-widest px-3 py-1.5 border border-[#C9A227]/50 shadow-md font-sans-clean z-30 pointer-events-none">
+                    {t(event.date)}
                   </div>
                 </motion.div>
 
@@ -117,10 +171,10 @@ export default function StorySection() {
                     className="text-2xl sm:text-3xl font-normal text-[#C9A227] mb-4"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
-                    {lang === 'mn' ? event.titleMn : event.titleEn}
+                    {t(event.title)} 💍
                   </h3>
                   <p className="text-sm sm:text-base leading-relaxed text-[#F6F1EA]/80 font-light max-w-xl mx-auto md:mx-0">
-                    {lang === 'mn' ? event.textMn : event.textEn}
+                    {t(event.text)}
                   </p>
                 </motion.div>
               </div>

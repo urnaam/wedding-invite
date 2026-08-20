@@ -33,9 +33,11 @@ export default function RsvpForm({ slug }: { slug: string }) {
 
   const [message, setMessage] = useState('');
   const [dietaryNotes, setDietaryNotes] = useState('');
-  const [needsTransport, setNeedsTransport] = useState(false);
   const [wantsAccommodation, setWantsAccommodation] = useState(false);
   const [wantsToSpeak, setWantsToSpeak] = useState(false);
+  const [whichTransport, setWhichTransport] = useState<'car' | 'train' | null>(
+    'car',
+  );
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -91,7 +93,7 @@ export default function RsvpForm({ slug }: { slug: string }) {
         members,
         message: finalMessage,
         dietaryNotes: choice === 'attending' ? dietaryNotes || null : null,
-        needsTransport: choice === 'attending' ? needsTransport : null,
+        whichTransport: choice === 'attending' ? whichTransport || null : null,
         wantsAccommodation: choice === 'attending' ? wantsAccommodation : null,
       }),
     });
@@ -227,7 +229,7 @@ export default function RsvpForm({ slug }: { slug: string }) {
                         {m.name}
                         {m.isChild && (
                           <span className="ml-2 rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-normal tracking-normal text-[#F6F1EA]/60 align-middle">
-                            {lang === 'mn' ? 'хүүхэд' : 'child'}
+                            {t('child')}
                           </span>
                         )}
                       </span>
@@ -279,49 +281,102 @@ export default function RsvpForm({ slug }: { slug: string }) {
               />
             </div>
             {/* УНАА ТЭВЭР БА ЛОЖИСТИК КАРТ */}
-            <motion.label
-              whileHover={{ scale: 1.01 }}
-              className={`flex items-start gap-4 rounded-xl border p-4 cursor-pointer transition-all duration-300 ${needsTransport ? 'border-[#C9A227] bg-[#C9A227]/5' : 'border-white/5 bg-[#121d33]/40 hover:border-white/10'}`}
-            >
-              <div
-                className="w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition-all"
-                style={{
-                  backgroundColor: needsTransport ? '#C9A227' : 'transparent',
-                  borderColor: needsTransport
-                    ? '#C9A227'
-                    : 'rgba(255,255,255,0.3)',
-                }}
-              >
-                {needsTransport && (
-                  <svg
-                    className="w-3 h-3 text-[#1B2A4A] stroke-current fill-none stroke-[2.5]"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                )}
-              </div>
-              <input
-                type="checkbox"
-                checked={needsTransport}
-                onChange={(e) => setNeedsTransport(e.target.checked)}
-                className="sr-only"
-              />
-              <div className="flex flex-col select-none">
-                <span
-                  className={`text-xs sm:text-sm font-medium tracking-wide flex items-center gap-1.5 ${needsTransport ? 'text-[#C9A227]' : 'text-[#F6F1EA]'}`}
+            <div className="flex flex-col gap-3">
+              {/* Асуултын гарчиг */}
+              <label className="text-xs sm:text-sm font-medium tracking-wide text-[#F6F1EA] flex items-center gap-2">
+                <span>🧭</span> {t('transportQuestion')}
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                {/* 1. Машинаар ирэх сонголт */}
+                <motion.label
+                  whileHover={{ scale: 1.01 }}
+                  className={`flex items-center gap-3.5 rounded-xl border p-4 cursor-pointer transition-all duration-300 ${
+                    whichTransport === 'car'
+                      ? 'border-[#C9A227] bg-[#C9A227]/10'
+                      : 'border-white/10 bg-[#121d33]/40 hover:border-white/20'
+                  }`}
                 >
-                  <span>🚌</span> {t('transportQuestion')}
-                </span>
-                <span className="text-[11px] text-[#F6F1EA]/50 mt-1 font-light leading-normal">
-                  {t('transportDesc')}
-                </span>
+                  <div
+                    className="w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all"
+                    style={{
+                      borderColor:
+                        whichTransport === 'car'
+                          ? '#C9A227'
+                          : 'rgba(255,255,255,0.3)',
+                    }}
+                  >
+                    {whichTransport === 'car' && (
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#C9A227]" />
+                    )}
+                  </div>
+                  <input
+                    type="radio"
+                    name="whichTransport"
+                    value="car"
+                    checked={whichTransport === 'car'}
+                    onChange={() => setWhichTransport('car')}
+                    className="sr-only"
+                  />
+                  <div className="flex items-center gap-2 select-none">
+                    <span className="text-base">🚗</span>
+                    <span
+                      className={`text-xs sm:text-sm font-medium ${
+                        whichTransport === 'car'
+                          ? 'text-[#C9A227]'
+                          : 'text-[#F6F1EA]'
+                      }`}
+                    >
+                      {t('byCar')}
+                    </span>
+                  </div>
+                </motion.label>
+
+                {/* 2. Галт тэрэгний унаагаар ирэх сонголт */}
+                <motion.label
+                  whileHover={{ scale: 1.01 }}
+                  className={`flex items-center gap-3.5 rounded-xl border p-4 cursor-pointer transition-all duration-300 ${
+                    whichTransport === 'train'
+                      ? 'border-[#C9A227] bg-[#C9A227]/10'
+                      : 'border-white/10 bg-[#121d33]/40 hover:border-white/20'
+                  }`}
+                >
+                  <div
+                    className="w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-all"
+                    style={{
+                      borderColor:
+                        whichTransport === 'train'
+                          ? '#C9A227'
+                          : 'rgba(255,255,255,0.3)',
+                    }}
+                  >
+                    {whichTransport === 'train' && (
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#C9A227]" />
+                    )}
+                  </div>
+                  <input
+                    type="radio"
+                    name="whichTransport"
+                    value="train"
+                    checked={whichTransport === 'train'}
+                    onChange={() => setWhichTransport('train')}
+                    className="sr-only"
+                  />
+                  <div className="flex items-center gap-2 select-none">
+                    <span className="text-base">🚆</span>
+                    <span
+                      className={`text-xs sm:text-sm font-medium ${
+                        whichTransport === 'train'
+                          ? 'text-[#C9A227]'
+                          : 'text-[#F6F1EA]'
+                      }`}
+                    >
+                      {t('byTrain')}
+                    </span>
+                  </div>
+                </motion.label>
               </div>
-            </motion.label>
+            </div>
             {/* 🏰 БАЙРЛАХ / ХОНОХ ГАЗРЫН АСУУЛГА КАРТ */}
             <motion.label
               whileHover={{ scale: 1.01 }}

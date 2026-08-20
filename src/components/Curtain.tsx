@@ -32,7 +32,7 @@ export default function Curtain({ children, onOpen }: CurtainProps) {
     // 2. Дугтуй бүрэн нээгдэж, захидал хөөрсний дараа үндсэн сайт руу шилжинэ
     setTimeout(() => {
       setIsRevealed(true);
-    }, 1200);
+    }, 1500);
   };
 
   if (!isReady) {

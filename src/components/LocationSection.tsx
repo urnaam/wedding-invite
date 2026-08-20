@@ -130,22 +130,61 @@ export default function LocationSection() {
         </motion.div>
       </div>
 
-      {/* Газрын зураг дээр очих зам заах гадаад холбоос товчлуур */}
+      {/* Зам заалт болон Газрын зургийн товчлуур */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-10 flex justify-center"
+        transition={{ duration: 0.6 }}
+        className="mt-10 flex flex-col items-center text-center px-4"
       >
-        <a
+        {/* Аян замын мэдээлэл / Зам заалт */}
+        <div className="flex flex-col items-center gap-3 max-w-md mb-8 font-serif-luxury text-xs sm:text-sm tracking-[0.08em] text-[#F6F1EA]/85">
+          {/* Машинаар явах заалт */}
+          <div className="flex items-center gap-2">
+            <svg
+              className="w-4 h-4 text-[#C9A227] shrink-0 fill-none stroke-current stroke-[1.5]"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.3.9L2 12v4c0 .6.4 1 1 1h2" />
+              <circle cx="7" cy="17" r="2" />
+              <circle cx="17" cy="17" r="2" />
+            </svg>
+            <p>
+              <span className="text-[#C9A227]">{t('byCar')}</span>{' '}
+              {t('byCarExit')}
+            </p>
+          </div>
+
+          {/* Галт тэрэгний заалт */}
+          <div className="flex items-center gap-2">
+            <svg
+              className="w-4 h-4 text-[#C9A227] shrink-0 fill-none stroke-current stroke-[1.5]"
+              viewBox="0 0 24 24"
+            >
+              <rect x="4" y="3" width="16" height="14" rx="2" />
+              <path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3" />
+              <circle cx="8" cy="15" r="1" className="fill-current" />
+              <circle cx="16" cy="15" r="1" className="fill-current" />
+            </svg>
+            <p>
+              <span className="text-[#C9A227]">{t('byTrain')}:</span>{' '}
+              {t('trainStop')}
+            </p>
+          </div>
+        </div>
+
+        {/* Газрын зураг дээр очих зам заах гадаад холбоос товчлуур */}
+        <motion.a
           href={mapsDirectionsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border border-gold/60 px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-gold hover:text-navy shadow-md active:scale-98"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="rounded-full border border-gold/60 px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-ivory transition-colors hover:bg-gold hover:text-navy shadow-md"
         >
           {t('getDirections')}
-        </a>
+        </motion.a>
       </motion.div>
     </section>
   );

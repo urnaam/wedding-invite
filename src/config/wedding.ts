@@ -129,7 +129,7 @@ export const wedding = {
     navy: '#1B2A4A',
     navyLight: '#2E4272',
     burgundy: '#6E1F2E',
-    sage: '#7C8B7A',
+    satinGold: '#D4AF37',
     ivory: '#F6F1EA',
     gold: '#C9A227',
   },

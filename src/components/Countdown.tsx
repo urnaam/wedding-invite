@@ -34,6 +34,21 @@ export default function Countdown() {
 
   return (
     <section className="flex flex-col items-center px-6 py-24">
+      {/* Илүү том, тансаг SAVE THE DATE хэсэг */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col items-center mb-10"
+      >
+        <p className="font-serif-luxury text-xl sm:text-2xl md:text-3xl tracking-[0.35em] uppercase text-gold font-medium">
+          Save the Date
+        </p>
+        <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent mt-3" />
+      </motion.div>
+
+      {/* Хугацаа тоологч (Countdown) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -53,6 +68,7 @@ export default function Countdown() {
         ))}
       </motion.div>
 
+      {/* Календарт нэмэх товч */}
       <motion.a
         href={googleCalendarUrl()}
         target="_blank"

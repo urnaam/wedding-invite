@@ -10,6 +10,12 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// Унааны сонголтыг Enum хэлбэрээр тодорхойлов
+enum TransportType {
+  car   // Машинаар
+  train // Галт тэргээр
+}
+
 model Guest {
   id             String         @id @default(cuid())
   slug           String         @unique
@@ -19,7 +25,7 @@ model Guest {
   status         String         @default("pending")
   message        String?
   dietaryNotes   String?        // хоолны харшил/анхаарах зүйл
-  needsTransport Boolean?       // унаа хэрэгтэй эсэх
+  whichTransport     TransportType? // "car" эсвэл "train" гэсэн сонголттой (Заавал биш учраас optional)
   needsAccommodation Boolean?
   respondedAt    DateTime?
   createdAt      DateTime       @default(now())

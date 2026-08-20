@@ -36,7 +36,7 @@ export async function GET() {
   ];
   for (const g of guests) {
     const formattedTransport =
-      g.status === 'attending' ? (g.needsTransport ? 'yes' : 'no') : '—';
+      g.status === 'attending' ? (g.whichTransport ? 'yes' : 'no') : '—';
     const formattedAccommodation =
       g.status === 'attending' ? (g.needsAccommodation ? 'yes' : 'no') : '—';
     if (g.members.length === 0) {

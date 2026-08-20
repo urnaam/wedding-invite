@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { wedding } from '@/config/wedding';
 import { useLanguage } from '@/i18n/LanguageContext';
 export default function Hero() {
@@ -12,58 +12,12 @@ export default function Hero() {
     setIsClient(true);
   }, []);
 
-  const date = new Date(wedding.dateTimeISO);
-  const year = date.getFullYear();
-  const monthIndex = date.getMonth(); // 0-11
-  const day = date.getDate();
-
-  const mnMonths = [
-    '1-р сарын',
-    '2-р сарын',
-    '3-р сарын',
-    '4-р сарын',
-    '5-р сарын',
-    '6-р сарын',
-    '7-р сарын',
-    '8-р сарын',
-    '9-р сарын',
-    '10-р сарын',
-    '11-р сарын',
-    '12-р сарын',
-  ];
-  const localeMap = {
-    mn: 'mn-MN',
-    en: 'en-US',
-    fr: 'fr-FR',
-    de: 'de-DE',
-    nl: 'nl-NL',
-    yue: 'zh-HK',
-  } as const;
-
-  // Огноог хэлнээс хамаарч хөрвүүлэх логик
-  let formattedDate = '';
-  if (isClient) {
-    if (lang === 'mn') {
-      // Монгол хэл дээр системээс үл хамааран төгс харагдах формат
-      formattedDate = `${year} оны ${mnMonths[monthIndex]} ${day}-ний өдөр`;
-    } else {
-      // Бусад хэл дээр стандарт Intl API ашиглана
-      const currentLocale =
-        lang in localeMap ? localeMap[lang as keyof typeof localeMap] : 'en-US';
-      formattedDate = date.toLocaleDateString(currentLocale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    }
-  }
   return (
-    /* 
-
-      min-h-screen ашиглан урилгын дэлгэцийг дүүрэн болгож, 
+    /*
+      min-h-screen ашиглан урилгын дэлгэцийг дүүрэн болгож,
       контент уртсах үед доошоо чөлөөтэй scroll хийх боломжийг олгоно.
     */
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden px-4 py-16 sm:py-24 text-center bg-[#1B2A4A] text-[#F6F1EA] selection:bg-[#C9A227] selection:text-[#1B2A4A]">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden px-4 text-center bg-[#1B2A4A] text-[#F6F1EA] selection:bg-[#C9A227] selection:text-[#1B2A4A]">
       {/* Арын фон дахь уусгалтай зөөлөн бургунди гэрэлтэлт */}
       <motion.div
         className="pointer-events-none absolute -top-24 left-1/2 h-[300px] w-[300px] sm:h-[520px] sm:w-[520px] -translate-x-1/2 rounded-full bg-burgundy/10 blur-3xl"
@@ -71,32 +25,83 @@ export default function Hero() {
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Тансаг зэрэглэлийн давхар алтан хүрээ */}
-      <div className="relative max-w-2xl w-full border border-[#C9A227]/30 p-6 sm:p-12 md:p-16 rounded shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-[#1B2A4A]/40 backdrop-blur-sm">
-        <div className="absolute inset-1.5 border-2 border-[#C9A227]/10 pointer-events-none" />
+      {/* Great Gatsby Art Deco Жааз */}
+      <div className="relative max-w-2xl w-full border-2 border-[#C9A227]/40 p-6 sm:p-12 md:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#1B2A4A]/50 backdrop-blur-md">
+        {/* Дотор талын давхар нарийн алтан хүрээнүүд */}
+        <div className="absolute inset-2 border border-[#C9A227]/30 pointer-events-none" />
+        <div className="absolute inset-3.5 border border-[#C9A227]/15 pointer-events-none" />
 
-        {/* Булангийн SVG угалзууд */}
+        {/* Булангийн Art Deco Геометрийн хээнүүд */}
         {[
-          'top-0 left-0',
-          'top-0 right-0 rotate-90',
-          'bottom-0 left-0 -rotate-90',
-          'bottom-0 right-0 rotate-180',
-        ].map((alignment, index) => (
+          { align: 'top-1.5 left-1.5', transform: '' },
+          { align: 'top-1.5 right-1.5', transform: 'scaleX(-1)' },
+          { align: 'bottom-1.5 left-1.5', transform: 'scaleY(-1)' },
+          { align: 'bottom-1.5 right-1.5', transform: 'scale(-1, -1)' },
+        ].map((item, index) => (
           <svg
             key={index}
-            className={`absolute w-8 h-8 sm:w-12 sm:h-12 stroke-[#C9A227]/60 fill-none stroke-[1.2] p-2 ${alignment}`}
+            className={`absolute w-12 h-12 sm:w-20 sm:h-20 stroke-[#C9A227] fill-none stroke-[1] p-1 ${item.align}`}
+            style={{ transform: item.transform }}
             viewBox="0 0 100 100"
           >
-            <path d="M 0,0 L 40,0 M 0,0 L 0,40 M 10,10 L 30,10 M 10,10 L 10,30" />
+            {/* Gatsby хэв маягийн хурц өнцөгт геометрийн сүлжээ */}
+            <path
+              d="M 0,0 L 40,0 L 40,8 L 8,8 L 8,40 L 0,40 Z"
+              className="fill-[#C9A227]/20 stroke-none"
+            />
+            <path d="M 0,0 L 65,0 L 65,4 L 4,4 L 4,65 L 0,65 Z" />
+            <path d="M 12,12 L 50,12 L 50,16 L 16,16 L 16,50 L 12,50 Z" />
+            <path
+              d="M 20,20 L 35,20 L 35,35 L 20,35 Z"
+              className="stroke-[0.8]"
+            />
+            <path d="M 0,0 L 35,35" className="stroke-[1.2]" />
+            <polygon
+              points="35,35 42,28 35,21 28,28"
+              className="fill-[#C9A227]/40 stroke-none"
+            />
+            <circle
+              cx="35"
+              cy="35"
+              r="1.5"
+              className="fill-[#C9A227] stroke-none"
+            />
           </svg>
         ))}
+
+        {/* Дээд ба Доод талын Төв Art Deco Чимэглэл (Gatsby Diamond Crown) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#1B2A4A] px-4">
+          <svg
+            className="w-16 h-6 stroke-[#C9A227] fill-none stroke-[1]"
+            viewBox="0 0 100 30"
+          >
+            <path d="M 0,15 L 35,15 L 50,0 L 65,15 L 100,15" />
+            <polygon
+              points="50,5 57,15 50,25 43,15"
+              className="fill-[#C9A227]/30 stroke-[#C9A227]"
+            />
+          </svg>
+        </div>
+
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-[#1B2A4A] px-4">
+          <svg
+            className="w-16 h-6 stroke-[#C9A227] fill-none stroke-[1]"
+            viewBox="0 0 100 30"
+          >
+            <path d="M 0,15 L 35,15 L 50,30 L 65,15 L 100,15" />
+            <polygon
+              points="50,25 57,15 50,5 43,15"
+              className="fill-[#C9A227]/30 stroke-[#C9A227]"
+            />
+          </svg>
+        </div>
 
         {/* Дээд угалз болон Текст */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-full font-sans-clean text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#C9A227] mb-6"
+          className="w-full font-sans-clean text-[10px] sm:text-xs uppercase tracking-[0.35em] text-[#C9A227] mb-6 mt-2"
         >
           {t('weCelebrate')}
         </motion.p>
@@ -106,10 +111,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="mt-4 font-script-luxury text-4xl leading-tight sm:text-6xl md:text-7xl md:leading-[1.5] text-[#F6F1EA] px-2"
+          className="flex flex-col mt-4 font-script-luxury text-4xl leading-tight sm:text-6xl md:text-7xl md:leading-[1.1] text-[#F6F1EA] px-2"
           style={{ fontFamily: "'Great Vibes', cursive" }}
         >
-          {wedding.coupleNames[lang]}
+          {wedding.coupleNames[lang].split('&').map((name, i, arr) => (
+            <span key={i}>
+              {i > 0 && (
+                <span className="block text-2xl md:text-3xl -my-1">&</span>
+              )}
+              {name.trim()}
+            </span>
+          ))}
         </motion.h1>
 
         {/* Олон хэл дээрх урилгын үндсэн бичвэрүүд */}
@@ -127,67 +139,117 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.65 }}
-          className="border-y border-[#C9A227]/20 my-8 py-4 mx-2 sm:mx-6"
+          className="border-y border-[#C9A227]/20 mt-8 py-5 mx-2 sm:mx-6 flex flex-col items-center justify-center gap-2"
         >
+          {/* Date Text */}
           <p className="font-serif-luxury text-base sm:text-xl md:text-2xl font-medium tracking-[0.12em] text-[#C9A227]">
-            {isClient ? formattedDate : 'Loading...'}
+            {isClient ? t('date') : 'Loading...'}
           </p>
-          {/* <p className="font-sans-clean text-[11px] sm:text-xs tracking-wider text-[#F6F1EA]/70 mt-2">
-            {t('weddingTime')}
-          </p> */}
+
+          {/* Location Name */}
+          <p className="font-serif-luxury text-xs sm:text-sm md:text-base tracking-[0.15em] text-[#F6F1EA]/85 uppercase mt-1">
+            {wedding.venue.name}
+          </p>
+
+          {/* Château Icon */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0.8 }}
+            animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="mt-2 text-[#C9A227]"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className="w-6 h-6 sm:w-7 sm:h-7 fill-none stroke-current stroke-[1.2]"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {/* Central Spire & Flag */}
+              <path d="M12 2v3M12 2l2 1.5L12 5" />
+              {/* Roofs */}
+              <path d="M12 5l-4 4h8l-4-4z" />
+              <path d="M4 10l3-3 3 3M14 10l3-3 3 3" />
+              {/* Main Structure & Towers */}
+              <path d="M4 10v10h16V10" />
+              <path d="M8 10v10M16 10v10" />
+              {/* Grand Entrance Gate */}
+              <path d="M10 20v-4a2 2 0 0 1 4 0v4" />
+              {/* Windows */}
+              <circle cx="12" cy="12" r="0.8" className="fill-current" />
+              <circle cx="6" cy="13" r="0.6" className="fill-current" />
+              <circle cx="18" cy="13" r="0.6" className="fill-current" />
+            </svg>
+          </motion.div>
         </motion.div>
 
-        {/* 
-          ГАЗРЫН МЭДЭЭЛЭЛ БА RSVP-ИЙН ОРОНД ОРУУЛСАН ТАНСАГ АНИМАЦИ:
-          Маш удаан зөөлөн эргэлдэх хуримын бөгж болон ургамлын хээ угалз бүхий SVG Crest
-        */}
+        {/* ГАЗРЫН МЭДЭЭЛЭЛ БА RSVP-ИЙН ОРОНД ОРУУЛСАН ТАНСАГ АНИМАЦИ */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
-          className="relative flex flex-col items-center justify-center mt-6 pt-2"
+          className="flex flex-col items-center justify-center mt-6 pt-2 w-full"
         >
-          {/* Эргэлдэгч Алтан Хээ угалзтай дугуй мандала */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-            className="w-24 h-24 sm:w-32 sm:h-32 text-[#C9A227]/40 flex items-center justify-center"
-          >
-            <svg
-              viewBox="0 0 100 100"
-              className="w-full h-full stroke-current fill-none stroke-[0.8]"
+          {/* Төв хэсэгт байрлах Аажмаар Зоом хийж (Zoom In/Out), зөөлөн гэрэлтэх хоёр бөгж */}
+          <div className="relative flex items-center justify-center w-full h-16">
+            <motion.div
+              animate={{
+                scale: [0.85, 1.15, 0.85],
+                opacity: [0.7, 1, 0.7],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              className="flex items-center justify-center text-[#C9A227]"
             >
-              {/* Гадна талын цэцэгт тойрог */}
-              <circle cx="50" cy="50" r="45" strokeDasharray="3 3" />
-              <circle cx="50" cy="50" r="40" />
-              {/* Дотоод угалзууд */}
-              <path d="M 50,10 C 40,25 60,35 50,50 C 40,65 60,75 50,90" />
-              <path d="M 10,50 C 25,40 35,60 50,50 C 65,40 75,60 90,50" />
-              <path d="M 22,22 C 35,35 45,25 50,50 C 55,75 65,65 78,78" />
-              <path d="M 78,22 C 65,35 55,25 50,50 C 45,75 35,65 22,78" />
-            </svg>
-          </motion.div>
+              <svg
+                viewBox="0 0 60 40"
+                className="w-36 h-32 fill-none stroke-current stroke-[1.2]"
+              >
+                {/* 1. ХААН БУГУЙВЧ БӨГЖ (Зүүн талд - Сүлжилдсэн 2 БӨӨРӨНХИЙ тойрог) */}
+                <g>
+                  <circle cx="20" cy="20" r="12" />
+                  <circle cx="17" cy="20" r="5" />
+                  <circle cx="23" cy="20" r="5" />
 
-          {/* Төв хэсэгт байрлах зөөлөн лугшиж, гэрэлтэх хоёр бөгжний бэлгэдэл */}
-          <motion.div
-            animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#C9A227] flex items-center justify-center"
-            style={{ marginTop: '-12px' }} // Анимейшн цэгцлэх тэнцвэржүүлэлт
-          >
-            <svg
-              viewBox="0 0 60 40"
-              className="w-14 h-10 fill-none stroke-current stroke-[1.2]"
-            >
-              {/* Зүүн бөгж */}
-              <circle cx="22" cy="20" r="12" />
-              {/* Баруун бөгж (Огтолцож буй) */}
-              <circle cx="38" cy="20" r="12" />
-            </svg>
-          </motion.div>
+                  {/* Гадна талын шигтгээнүүд (Голын шигтгээг арилгав) */}
+                  <circle cx="20" cy="8" r="1" className="fill-current" />
+                  <circle cx="20" cy="32" r="1" className="fill-current" />
+                  <circle cx="8" cy="20" r="1" className="fill-current" />
+                </g>
+
+                {/* 2. ХАТАН СҮЙХ БӨГЖ (Баруун талд - Сүлжилдсэн 2 РОМБО дөрвөлжин) */}
+                <g>
+                  <circle cx="40" cy="20" r="12" />
+                  <rect
+                    x="33.5"
+                    y="16.5"
+                    width="7"
+                    height="7"
+                    rx="0.8"
+                    transform="rotate(45 37 20)"
+                  />
+                  <rect
+                    x="39.5"
+                    y="16.5"
+                    width="7"
+                    height="7"
+                    rx="0.8"
+                    transform="rotate(45 43 20)"
+                  />
+
+                  {/* Гадна талын шигтгээнүүд (Голын шигтгээг арилгав) */}
+                  <circle cx="40" cy="8" r="1" className="fill-current" />
+                  <circle cx="40" cy="32" r="1" className="fill-current" />
+                  <circle cx="52" cy="20" r="1" className="fill-current" />
+                </g>
+              </svg>
+            </motion.div>
+          </div>
 
           {/* Доод талын тансаг нарийн шугам */}
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#C9A227]/40 to-transparent mt-4" />
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#C9A227]/40 to-transparent mt-2" />
         </motion.div>
       </div>
     </section>

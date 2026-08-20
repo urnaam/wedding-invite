@@ -8,7 +8,7 @@ CREATE TABLE "Guest" (
     "status" TEXT NOT NULL DEFAULT 'pending',
     "message" TEXT,
     "dietaryNotes" TEXT,
-    "needsTransport" BOOLEAN,
+    "whichTransport" TEXT,
     "needsAccommodation" BOOLEAN,
     "respondedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

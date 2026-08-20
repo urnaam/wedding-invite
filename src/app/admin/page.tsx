@@ -39,7 +39,11 @@ export default async function AdminDashboard({
   if (sideFilter !== 'all') where.side = sideFilter;
 
   if (transportFilter !== 'all') {
-    where.needsTransport = transportFilter === 'yes';
+    if (transportFilter === 'car') {
+      where.whichTransport = 'car';
+    } else if (transportFilter === 'train') {
+      where.whichTransport = 'train';
+    }
   }
   if (accommodationFilter !== 'all') {
     where.needsAccommodation = accommodationFilter === 'yes';
@@ -93,7 +97,7 @@ export default async function AdminDashboard({
 
   // 🚌 Шинэ асуулгуудын тоолуур
   const transportCount = allGuests.filter(
-    (g) => g.status === 'attending' && g.needsTransport === true,
+    (g) => g.status === 'attending' && g.whichTransport === 'car',
   ).length;
   const accommodationCount = allGuests.filter(
     (g) => g.status === 'attending' && g.needsAccommodation === true,
@@ -201,9 +205,9 @@ export default async function AdminDashboard({
               defaultValue={transportFilter}
               className="mt-1 w-full rounded-full border border-gold/30 bg-navy px-4 py-2 text-xs text-ivory focus:border-gold focus:outline-none"
             >
-              <option value="all">All</option>
-              <option value="yes">need</option>
-              <option value="no">no need</option>
+              <option value="all">All Transports</option>
+              <option value="car">🚗 Car</option>
+              <option value="train">🚆 Train</option>
             </select>
           </div>
 
@@ -321,12 +325,22 @@ export default async function AdminDashboard({
                     ))}
                   </td>
                   {/* 5. Нийтийн унаа хэрэгтэй эсэх */}
-                  <td className="px-4 py-3.5 text-center text-xs">
-                    {g.status === 'attending'
-                      ? g.needsTransport
-                        ? '🚎 Yes'
-                        : '❌ No'
-                      : '—'}
+                  <td className="px-4 py-3.5 text-center text-xs font-medium">
+                    {g.status === 'attending' ? (
+                      g.whichTransport === 'car' ? (
+                        <span className="inline-flex items-center gap-1 text-[#C9A227]">
+                          🚗 {'car'}
+                        </span>
+                      ) : g.whichTransport === 'train' ? (
+                        <span className="inline-flex items-center gap-1 text-sky-400">
+                          🚆 {'train'}
+                        </span>
+                      ) : (
+                        '—'
+                      )
+                    ) : (
+                      '—'
+                    )}
                   </td>
                   {/* 6. Хонох байрлах өрөө хэрэгтэй эсэх */}
                   <td className="px-4 py-3.5 text-center text-xs">

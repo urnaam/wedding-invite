@@ -43,8 +43,6 @@ export default function SiteExperience({
     }
   }, [initialLang, suggestLang]);
 
-  console.log('initialLang:::', initialLang, suggestLang);
-
   return (
     <Curtain onOpen={() => musicRef.current?.play()}>
       {/* <LanguageSwitcher /> */}
@@ -52,7 +50,7 @@ export default function SiteExperience({
         <Hero />
         <Countdown />
         {/* <ScheduleSection /> */}
-        {/* <LoveStory /> */}
+        <LoveStory />
         <LocationSection />
         <DressCode />
         <GiftSection />
@@ -65,7 +63,7 @@ export default function SiteExperience({
         )}
         <Footer />
       </main>
-      <MusicToggle ref={musicRef} />
+      {/* <MusicToggle ref={musicRef} /> */}
     </Curtain>
   );
 }

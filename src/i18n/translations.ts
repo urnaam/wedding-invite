@@ -13,17 +13,22 @@ export const translations: Record<Lang, Record<string, string>> = {
   mn: {
     tapToOpen: 'Тавцан нээхийн тулд товшино уу',
     weCelebrate: 'Бидний хурим',
+    date: '2027 оны 10-р сарын 12-13-ний өдөр',
     days: 'өдөр',
     hours: 'цаг',
     minutes: 'минут',
     seconds: 'секунд',
+    saveDate: 'Хуримын тов',
     addToCalendar: 'Google Calendar-т нэмэх',
     whereTitle: 'Хаана',
     getDirections: 'Чиглэл авах',
+    byCar: 'Машинаар',
+    byCarExit: 'Парисаас 1 цаг (Sortie 17 Gaillon)',
+    byTrain: 'Галт тэрэг',
+    trainStop: 'Gaillon-Aubevoye өртөө хүртэл',
     dressCodeLabel: 'Хувцасны өнгө',
     dressCodeTitle: 'Хувцаслалтын код',
-    dressCodeText:
-      'Хатуу дүрэм байхгүй ч, өнгөний палитраа баримжаалж хувцасаа сонговол баярлана: харанхуй хөх (navy), бордо (burgundy), алт (gold). Цагаан өнгийг өмсөхөөс татгалзана уу.',
+    dressCodeText: 'Хатуу дүрэм байхгүй.',
     rsvpLabel: 'RSVP',
     findInviteTitle: 'Өөрийн урилгыг олоорой',
     findInviteSubtitle: 'Нэрээ бичээд ирц баталгаажуулна уу.',
@@ -56,9 +61,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     notAttending: 'Оролцох боломжгүй',
     dietaryNotes: 'Хоолны харшил / Анхаарах зүйл:',
     dietaryPlaceholder: 'Жишээ нь: Харшилтай хоол, цагаан хоолтон гэх мэт...',
-    transportQuestion: 'Танд унаа хэрэгтэй юу?',
-    transportDesc:
-      'Хэрэв танд нэгдсэн автобус/унаа шаардлагатай бол идэвхжүүлнэ үү.',
+    transportQuestion: 'Та ямар унаагаар хүрэлцэн ирэх вэ?',
     transportYes: 'Тийм, хэрэгтэй',
     transportNo: 'Үгүй, өөрөө ирнэ',
     seeMore: 'Дэлгэрэнгүй',
@@ -69,7 +72,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     messageToCouple: 'Залуу хосуудад үлдээх үг:',
     giftTitle: 'Бэлгийн зөвлөмж',
     giftDescription:
-      'Бидний хуримын хамгийн том бэлэг бол таны ерөөл, оролцоо юм. Хэрэв та бидэнд бэлэг өгөхийг хүсвэл шинэ гэр бүлийн минь ирээдүйн хуримтлал, аялалд зориулан мөнгөн бэлэг дугтуйлахыг илүүд үзэхийг хүсье.',
+      'Манай хуримд та оролцож байгаагаараа бидэнд хамгийн үнэ цэнэтэй бэлэг юм. Гэсэн хэдий ч хэрэв та бидэнд бэлэг өгөхөөр бол бид үүнийг чин сэтгэлийн талархалтайгаар хүлээн авна.',
     tapTheSeal: 'Тамган дээр дарж нээнэ үү',
     invitationText:
       'Таныг хоймортоо залж, хуримын баярын эрхэм нандин мөчүүдээ хамтдаа хуваалцахыг хүсэн ерөөж урьж байна.',
@@ -81,39 +84,55 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: 'Хуримын гэрчүүд',
     suggestedColors: 'Зочдод санал болгох хувцасны өнгө',
     weddingColors: 'Гэрчүүдэд зориулсан тусгай өнгөнүүд',
-    ladiesGuide: 'Эмэгтэй зочид',
-    ladiesDressCode:
-      'Хуримын хос болон гэрчүүд өөрсдийн онцгой хэв маягийг илтгэх Цэвэр цагаан, Гүн хөх (Midnight Navy), Хүрэн улаан (Burgundy) өнгөөр ижилсэн хувцаслах тул эрхэм бүсгүйчүүд та бүхнийг цагаан, крем буюу цайвар шаргал, эсвэл хэтэрхий цайвар пастел өнгөнөөс бүрэн татгалзахыг хүсэж байна. Үүний оронд Дулаан саарал (Warm Taupe), Алтлаг өнгө аяс, эсвэл гүн хушин бор (Dusty Cedar) зэрэг тансаг, тод өнгийн даавууг сонгохыг найрсагар зөвлөж байна.',
-    gentlemenGuide: 'Эрэгтэй зочид',
-    gentlemenDressCode:
-      'Бид таныг сонгодог хар, эсвэл илүү цэгцтэй саарал, нүүрсэн саарал (Charcoal Gray) өнгийн албан ёсны хослол сонгохыг зөвлөж байна. Хүргэн болон түүний гэрчүүд Гүн хөх (Midnight Navy) өнгийн хослолоор ижилсэх тул хуримын гэрчүүдийн онцгой төрхийг хадгалах үүднээс хөх болон хүрэн улаан (Burgundy) өнгийн пиджак сонгохоос татгалзахыг найрсагар хүсэж байна.',
+    ladiesMenGuide: 'Эрэгтэй Эмэгтэй зочид нарт зориулсан хувцасны код',
+    ladiesMenDressCode:
+      'Хуримын хос болон хуримын гэрчүүд цагаан, гүн хөх, бордо улаан, өнгөөр гоёх тул та бүхнийг хар бараан, илүү тансаг өнгө сонгож, эдгээр гурван өнгөнөөс зайлсхийхийг зөвлөж байна. Ингэснээр хуримын дүр төрхийн зохицлыг хадгална.',
     bridesmaids: 'Бүсгүйн гэрчүүд',
     bridesmaidsDressCode:
-      'Сүйт бүсгүйн гэрчүүд маань ижилссэн Sage Green (цайвар даруухан ногоон) өнгийн, урсгал зөөлөн торгон материалтай урт даашинзаар гоёж, хуримын тансаг өнгө төрхийг бүрдүүлнэ.',
+      'Сүйт бүсгүйн гэрчүүд маань ижилссэн ёслолын цэцгэн болон байгалийн гоо зүйтэй төгс зохицох сатин алтлаг өнгийн даашинз өмсөнө.',
     groomsmen: 'Залуугийн гэрчүүд',
     groomsmenAttire:
-      'Хүргэний гэрчүүд гүн хөх өнгийн (Navy Blue) ижилссэн хослол өмсөж, дарсны улаан (Burgundy) эрвээхэй зангиа, халаасны алчуураар гоёж, маш чамин, тансаг контраст хослолыг бүрдүүлэх болно.',
+      'Хүргэний гэрчүүд гүн хөх өнгийн костюм, бордо өнгийн аксессуартай хослуулан өмсөж, загварлаг контрастыг төгс тэнцвэржүүлсэн, онцгой тансаг төрхтэй харагдана.',
     giftLabel: 'Бэлэг',
     accommodationTitle: 'Хурим болох газарт хонох уу?',
     accommodationDesc:
       'Хуримын талбайд хонож амрах өрөө, байрлалыг урьдчилан төлөвлөхөд тусална.',
     speechTitle: 'Хуримын баярын үеэр үг хэлэх үү?',
     speechDesc: 'Баярын хөтөлбөрт микрофон авах хугацааг төлөвлөхөд тусална.',
+    beautifulJourney: 'Бидний нандин дурсамжууд',
+    loveStoryTitle: 'Хайрын Түүх',
+    firstMeeting: 'Анхны уулзалт',
+    firstMeetingDate: '2023 оны 7-р сар',
+    firstMeetingDesc:
+      'Бид хоёр анх OkCupid апп-аар танилцаад, сар орчим бие биедээ зурвас бичиж харилцсан юм. Ингээд 7-р сарын нэгэн өдөр анх удаа уулзахаар шийдэж билээ. Тэрхүү мартагдашгүй уулзалтаас хойш бид нэг л мэдэхэд салшгүй болж, хамтдаа шинэ түүхээ бичиж эхэлсэн.',
+    ourJourneys: 'Хамтын аялал',
+    ourJourneysDate: '2024 оны 01-р сар',
+    ourJourneysDesc:
+      'Үерхэж эхлээд удаагүй байтал нэгний маань ажлын гэрээ дуусч, Европ руу буцах хэрэг гарснаар бид холын зайн харилцааг туулах шаардлагатай болсон.\nГэхдээ Япон руу нүүхээс өмнө бид Европт хамтдаа мартагдашгүй аялал хийж, маш олон сайхан дурсамжуудыг бүтээсэн юм. Энэ бүхэн биднийг хооронд нь улам бөх холбож өгсөн билээ.',
+    proposal: 'Тийм гэж хэлсэн мөч',
+    proposalDate: '2025 оны 09-р сар',
+    proposalDesc:
+      'Бидний амьдралын хамгийн чухал, нандин мөч. Хоёр биедээ амьдралынхаа эцэст хүртэл хамтдаа байх нандин амлалт өгч, ирээдүйгээ хамтдаа бүтээхээр сэтгэл шулуудсан өдөр. Ингээд бид амьдралынхаа шинэ хуудсыг хамтдаа нээж байна.',
   },
   en: {
     tapToOpen: 'Tap to draw back the curtain',
     weCelebrate: "We're celebrating our wedding",
+    date: 'October 12-13, 2027',
     days: 'days',
     hours: 'hours',
     minutes: 'min',
     seconds: 'sec',
+    saveDate: 'Save the date',
     addToCalendar: 'Add to Google Calendar',
     whereTitle: 'Where',
     getDirections: 'Get Directions',
+    byCar: 'By car',
+    byCarExit: '1 hour from Paris (Exit 17 Gaillon)',
+    byTrain: 'By train',
+    trainStop: 'To Gaillon-Aubevoye station',
     dressCodeLabel: 'Dress Code',
     dressCodeTitle: 'Dress Code',
-    dressCodeText:
-      "No strict dress code, but we'd love it if you leaned into our palette: navy, burgundy, and gold. Please avoid white.",
+    dressCodeText: 'No strict dress code.',
     rsvpLabel: 'RSVP',
     findInviteTitle: 'Find your invitation',
     findInviteSubtitle: 'Type your name to confirm your attendance.',
@@ -143,9 +162,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     womenLabel: 'Women',
     dietaryLabel: 'Dietary needs',
     dietaryPlaceholder: 'e.g., Allergies, Vegetarian, etc...',
-    transportQuestion: 'Do you need transport?',
-    transportDesc:
-      'Check this if you plan to use the provided group shuttle service.',
+    transportQuestion: 'What vehicle will you be arriving in?',
     transportYes: 'Yes, I need transport',
     transportNo: 'No, I will go by myself',
     seeMore: 'Read more',
@@ -161,7 +178,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     messageToCouple: 'Message to the couple:',
     giftTitle: 'Gift Registry & Wishes',
     giftDescription:
-      'Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, a monetary contribution towards our future home and honeymoon fund would be sincerely appreciated.',
+      'Your presence at our wedding is the greatest gift of all. However, if you’d like to treat us to a gift, it will be received with our most sincere gratitude.',
     tapTheSeal: 'Tap seal to open invitation',
     invitationText:
       'Request the honor of your presence at the celebration of their marriage vows.',
@@ -173,18 +190,15 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: 'Wedding Party',
     suggestedColors: 'Suggested Guest Colors',
     weddingColors: 'Unified Wedding Party Tones',
-    ladiesGuide: 'Ladies Guide',
-    ladiesDressCode:
-      'Since the wedding couple and the bridal party will be uniquely styled in solid White, Midnight Navy, and Burgundy, we kindly request our lovely ladies to completely avoid any white, cream, or overly light pastel tones. Instead, we highly encourage rich standout options such as Warm Taupe, Golden Accents, or deep dusty cedar fabrics.',
-    gentlemenGuide: 'Gentlemen Guide',
-    gentlemenDressCode:
-      'We recommend choosing a classic black or a refined muted slate/charcoal gray formal suit. As the groom and groomsmen will be wearing unified Midnight Navy suits, please kindly steer away from navy or burgundy jackets to ensure the wedding party remains beautifully distinguished.',
+    ladiesMenGuide: 'Dress Code for Ladies and Gentlemen',
+    ladiesMenDressCode:
+      'Since the bride and groom and the wedding party will be dressed in white, midnight blue, and burgundy, we encourage you to choose darker, more elegant shades while avoiding these three colors to maintain the visual harmony of the wedding party.',
     bridesmaids: 'Bridesmaids',
     bridesmaidsDressCode:
-      'Our beautiful bridesmaids will be wearing coordinated floor-length gowns in Sage Green, matching the romantic and natural floral aesthetics of the ceremony.',
+      'Our beautiful bridesmaids will wear elegant satin gold dresses, perfectly complementing the floral and natural aesthetic of the ceremony.',
     groomsmen: 'Groomsmen',
     groomsmenAttire:
-      'The groomsmen will be looking sharp in unified Navy Blue suits, accessorized with matching Burgundy bowties and pocket squares to create a high-contrast elegant union.',
+      'The groom’s best men will look exceptionally elegant in their navy blue suits, accented with burgundy accessories, creating a perfect balance of elegant contrasts.',
     giftLabel: 'Gift',
     accommodationTitle: 'Do you require overnight accommodation?',
     accommodationDesc:
@@ -192,21 +206,40 @@ export const translations: Record<Lang, Record<string, string>> = {
     speechTitle: 'Would you like to give a speech or toast?',
     speechDesc:
       'Helps us coordinate the reception schedule and microphone slots.',
+    beautifulJourney: 'Our Beautiful Journey',
+    loveStoryTitle: 'Our Love Story',
+    firstMeeting: 'First Meeting',
+    firstMeetingDate: 'July 2023',
+    firstMeetingDesc:
+      'We first met on OkCupid and exchanged messages for about a month before deciding to meet in person in July. Since that unforgettable first date, we became inseparable and started writing our story together.',
+    ourJourneys: 'Our Journeys',
+    ourJourneysDate: 'January, 2024',
+    ourJourneysDesc:
+      'Not long after we started dating, one of our work contracts ended and led to a return to Europe, putting us in a long-distance relationship.\nHowever, before the move to Japan, we took an unforgettable trip to Europe together and created so many great memories. It truly brought us even closer.',
+    proposal: 'The Proposal',
+    proposalDate: 'September 2025',
+    proposalDesc:
+      'The most important and precious moment of our lives. The day we promised to spend forever together and decided to build our future side by side. Now, we are so excited to start this beautiful new chapter together.',
   },
   fr: {
     tapToOpen: 'Touchez pour ouvrir le rideau',
     weCelebrate: 'Nous célébrons notre mariage',
+    date: '12-13 Octobre 2027',
     days: 'jours',
     hours: 'heures',
     minutes: 'min',
     seconds: 'sec',
+    saveDate: 'réservez la date',
     addToCalendar: 'Ajouter à Google Agenda',
     whereTitle: 'Lieu',
     getDirections: 'Itinéraire',
+    byCar: 'En voiture',
+    byCarExit: 'À 1 heure de Paris (sortie 17 Gaillon)',
+    byTrain: 'En train',
+    trainStop: "Jusqu'à la gare de Gaillon-Aubevoye",
     dressCodeLabel: 'Tenue',
     dressCodeTitle: 'Code Vestimentaire',
-    dressCodeText:
-      "Pas de code vestimentaire strict, mais nous serions ravis que vous vous inspiriez de notre palette : bleu marine, bordeaux et or. Merci d'éviter le blanc.",
+    dressCodeText: 'Pas de code vestimentaire strict.',
     rsvpLabel: 'RSVP',
     findInviteTitle: 'Trouvez votre invitation',
     findInviteSubtitle: 'Tapez votre nom pour confirmer votre présence.',
@@ -241,38 +274,50 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: 'Cortège de mariage',
     suggestedColors: 'Couleurs suggérées pour les invités',
     weddingColors: 'Tons unifiés du cortège',
-    ladiesGuide: 'Guide pour les dames',
-    ladiesDressCode:
-      "Le couple de mariés et le cortège étant habillés de manière exclusive en Blanc uni, Bleu nuit et Bourgogne, нам demandons gentiment à nos chères invitées d'éviter complètement le blanc, la couleur crème ou les tons pastels trop clairs. À la place, nous vous encourageons vivement à opter pour des teintes riches et remarquables telles que le Taupe chaud, les touches dorées ou des tissus cèdre poudré profond.",
-    gentlemenGuide: 'Guide pour les messieurs',
-    gentlemenDressCode:
-      "Nous recommandons de choisir un costume de cérémonie noir classique ou un gris ardoise/anthracite épuré. Le marié et les garçons d'honneur portant des costumes coordonnés Bleu nuit, nous vous prions d'éviter les vestes bleu marine ou bordeaux afin que le cortège reste parfaitement distinct.",
-    bridesmaids: "Demoiselles d'honneur",
+    ladiesMenGuide: 'Lady & Men dresscode',
+    ladiesMenDressCode:
+      'Le couple de mariés et le cortège étant habillés en blanc, bleu nuit et bordeaux, nous vous encourageons à opter pour des teintes plus foncées et élégantes, tout en évitant ces trois couleurs afin de préserver l’harmonie visuelle du cortège.',
+    bridesmaids: "Demoiselle d'honneur",
     bridesmaidsDressCode:
-      "Nos magnifiques demoiselles d'honneur porteront des robes longues coordonnées de couleur Vert sauge, s'harmonisant avec l'esthétique florale romantique et naturelle de la cérémonie.",
-    groomsmen: "Garçons d'honneur",
+      'Nos magnifiques demoiselles d’honneur porteront d’élégantes robes Satin Gold, en parfaite harmonie avec l’esthétique florale et raffinée de la cérémonie.',
+    groomsmen: "Garcons d'honneur",
     groomsmenAttire:
-      "Les témoins du marié seront d'une élégance rare dans des costumes bleu marine coordonnés, sublimés par des nœuds papillon et des pochettes bordeaux assortis, créant un accord parfait tout en contrastes.",
+      'Les témoins du marié seront d’une élégance rare dans leurs costumes bleu marine, sublimés par des accessoires bordeaux, créant un accord parfait aux contrastes élégants.',
     giftLabel: 'Cadeau',
     giftTitle: 'Liste de Mariage & Vœux',
     giftDescription:
-      "Votre présence à notre mariage est le plus beau des cadeaux. Cependant, si vous souhaitez nous honorer d'un présent, une contribution financière pour notre future maison ou notre lune de miel sera reçue avec notre plus sincère gratitude.",
+      'Votre présence à notre mariage est le plus beau des cadeaux. Si vous souhaitez néanmoins nous faire plaisir en nous offrant un présent, celui-ci sera reçu avec notre plus sincère gratitude.',
     dietaryNotes: 'Régimes Alimentaires & Notes',
     dietaryPlaceholder:
       'ex. Végétarien, allergie aux fruits de mer, sans noix, etc...',
-    transportQuestion: "Avez-vous besoin d'un transport ?",
-    transportDesc:
-      "Cochez cette case si vous prévoyez d'utiliser le service de navette collective mis à disposition.",
+    transportQuestion: 'Dans quel véhicule viendrez-vous ?',
     accommodationTitle: "Avez-vous besoin d'un hébergement sur place ?",
     accommodationDesc:
       "Nous permet de coordonner la répartition des chambres et d'organiser au mieux l'hébergement de nos invités.",
     speechTitle: 'Souhaitez-vous porter un toast ou faire un discours ?',
     speechDesc:
       'Nous permet de coordonner le déroulement de la réception et de planifier les interventions au micro.',
+    child: 'Enfant',
+    beautifulJourney: 'Notre beau parcours',
+    loveStoryTitle: "Notre histoire d'amour",
+    firstMeeting: 'Première rencontre',
+    firstMeetingDate: 'Juillet 2023',
+    firstMeetingDesc:
+      'Nous nous sommes rencontrés pour la première fois sur OkCupid et avons échangé des messages pendant environ un mois avant de décider de nous voir en personne en juillet. Depuis ce premier rendez-vous inoubliable, nous sommes devenus inséparables et avons commencé à écrire notre histoire ensemble.',
+    ourJourneys: 'Nos parcours',
+    ourJourneysDate: 'Janvier 2024',
+    ourJourneysDesc:
+      'Peu de temps après le début de notre relation, l’un de nos contrats de travail a pris fin, ce qui a entraîné un retour en Europe et nous a placés dans une relation à distance.\nCependant, avant de déménager au Japon, nous avons fait ensemble un voyage inoubliable en Europe et créé tant de merveilleux souvenirs. Cela nous a vraiment rapprochés encore davantage.',
+    proposal: 'La demande en mariage',
+    proposalDate: 'Septembre 2025',
+    proposalDesc:
+      'Le moment le plus important et le plus précieux de nos vies. Le jour où nous nous sommes promis de passer le reste de notre vie ensemble et où nous avons décidé de construire notre avenir côte à côte. Aujourd’hui, nous sommes ravis de commencer ce nouveau et magnifique chapitre ensemble.',
   },
   de: {
     tapToOpen: 'Zum Öffnen des Vorhangs tippen',
     weCelebrate: 'Wir feiern unsere Hochzeit',
+    date: '12.–13. Oktober 2027',
+    saveDate: 'Termin vormerken',
     days: 'Tage',
     hours: 'Std',
     minutes: 'Min',
@@ -280,10 +325,13 @@ export const translations: Record<Lang, Record<string, string>> = {
     addToCalendar: 'Zu Google Kalender hinzufügen',
     whereTitle: 'Ort',
     getDirections: 'Route anzeigen',
+    byCar: 'Mit dem Auto',
+    byCarExit: '1 Stunde von Paris entfernt (Ausfahrt 17 Gaillon)',
+    byTrain: 'Mit dem Zug',
+    trainStop: 'Zum Bahnhof Gaillon-Aubevoye',
     dressCodeLabel: 'Kleidung',
     dressCodeTitle: 'Dresscode',
-    dressCodeText:
-      'Es gibt keinen strengen Dresscode, aber wir würden uns freuen, wenn ihr euch an unserer Farbpalette orientiert: Marineblau, Bordeaux und Gold. Bitte kein Weiß.',
+    dressCodeText: 'Es gibt keinen strengen Dresscode.',
     rsvpLabel: 'RSVP',
     findInviteTitle: 'Finde deine Einladung',
     findInviteSubtitle:
@@ -309,7 +357,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     tapTheSeal: 'Siegel berühren, um Invitation zu öffnen',
     title: 'Hochzeitseinladung',
     invitationText:
-      'Wir bitten дарум, uns durch Ihre geschätzte Anwesenheit bei der Feier unseres Eheversprechens zu beehren.',
+      'Wir bitten darum, uns durch Ihre geschätzte Anwesenheit bei der Feier unseres Eheversprechens zu beehren.',
     weddingTime: 'Um vier Uhr am Nachmittag',
     locationCaption: 'Elegantes Ambiente im Freien',
     locationCaption1: 'Innen-Esszimmer',
@@ -318,38 +366,50 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: 'Hochzeitsgesellschaft',
     suggestedColors: 'Empfohlene Farben für Gäste',
     weddingColors: 'Einheitliche Töne der Hochzeitsgesellschaft',
-    ladiesGuide: 'Leitfaden für Damen',
-    ladiesDressCode:
-      'Da das Brautpaar und die Hochzeitsgesellschaft exklusiv in reinem Weiß, Mitternachtsblau und Burgund gekleidet sein werden, bitten wir unsere lieben Damen höflich darum, Weiß, Cremetöne oder zu helle Pastellfarben vollständig zu vermeiden. Stattdessen empfehlen wir Ihnen ausdrucksstarke, kräftige Optionen wie warmes Taupe, goldene Akzente oder Stoffe in tiefem, staubigem Zedernholz.',
-    gentlemenGuide: 'Leitfaden für Herren',
-    gentlemenDressCode:
-      'Wir empfehlen die Wahl eines klassischen schwarzen oder eines eleganten, dezenten schiefer-/anthrazitgrauen Anzugs. Da der Bräutigam und die Trauzeugen einheitliche mitternachtsblaue Anzüge tragen werden, bitten wir Sie höflich, von dunkelblauen oder burgunderroten Sakkos Abstand zu nehmen, damit die Hochzeitsgesellschaft optisch klar hervorsticht.',
+    ladiesMenGuide: 'Kleiderordnung für Damen und Herren',
+    ladiesMenDressCode:
+      'Da das Brautpaar und die Hochzeitsgesellschaft in Weiß, Nachtblau und Bordeauxrot gekleidet sind, empfehlen wir Ihnen, dunklere und elegante Farbtöne zu wählen und diese drei Farben zu vermeiden, um die optische Harmonie der Hochzeitsgesellschaft zu wahren.',
     bridesmaids: 'Brautjungfern',
     bridesmaidsDressCode:
-      'Unsere wunderschönen Brautjungfern werden aufeinander abgestimmte, bodenlange Kleider in Salbeigrün tragen, die perfekt auf die romantische und natürliche Blumenästhetik der Zeremonie abgestimmt sind.',
+      'Unsere wunderschönen Brautjungfern werden elegante goldfarbene Satinkleider tragen, die perfekt mit der blumigen und raffinierten Ästhetik der Zeremonie harmonieren.',
     groomsmen: 'Trauzeugen',
     groomsmenAttire:
-      'Die Trauzeugen werden in eleganten, einheitlichen marineblauen Anzügen glänzen, abgerundet durch farblich abgestimmte burgunderrote Fliegen und Einstecktücher, um einen kontrastreichen und stilvollen Gesamteindruck zu schaffen.',
+      'Die Trauzeugen des Bräutigams werden in ihren marineblauen Anzügen von seltener Eleganz sein, die durch burgunderrote Accessoires unterstrichen werden und so ein perfektes Zusammenspiel eleganter Kontraste schaffen.',
     giftLabel: 'Geschenk',
     giftTitle: 'Geschenkwünsche',
     giftDescription:
-      'Eure Anwesenheit an unserem Hochzeitstag ist für uns das allergrößte Geschenk. Sollten Крах uns dennoch eine Freude machen wollen, würden wir uns über einen finanziellen Beitrag für unser zukünftiges Zuhause und unsere Flitterwochen von Herzen freuen.',
+      'Ihre Anwesenheit bei unserer Hochzeit ist das schönste Geschenk. Sollten Sie uns dennoch mit einem Geschenk eine Freude machen wollen, nehmen wir dieses mit aufrichtiger Dankbarkeit entgegen.',
     dietaryNotes: 'Besondere Ernährungshinweise & Allergien',
     dietaryPlaceholder:
       'z. B. Vegetarisch, Nussallergie, Meeresfrüchte-Allergie, etc...',
-    transportQuestion: 'Benötigen Sie einen Shuttleservice?',
-    transportDesc:
-      'Bitte ankreuzen, wenn Sie planen, den bereitgestellten Sammeltransfer zu nutzen.',
+    transportQuestion: 'Mit welchem Fahrzeug werden Sie anreisen?',
     accommodationTitle: 'Benötigen Sie eine Übernachtungsmöglichkeit?',
     accommodationDesc:
       'Hilft uns dabei, die Zimmeraufteilung und Übernachtungen für unsere Gäste optimal zu planen.',
     speechTitle: 'Möchten Sie eine Rede oder einen Toast halten?',
     speechDesc:
       'Hilft uns dabei, den Ablauf der Feier zu koordinieren und Zeitfenster für Mikrofone einzuplanen.',
+    child: 'Kind',
+    beautifulJourney: 'Unsere wunderschöne Reise',
+    loveStoryTitle: 'Unsere Liebesgeschichte',
+    firstMeeting: 'Das erste Treffen',
+    firstMeetingDate: 'Juli 2023',
+    firstMeetingDesc:
+      'Wir haben uns zum ersten Mal auf OkCupid kennengelernt und etwa einen Monat lang Nachrichten ausgetauscht, bevor wir uns im Juli entschlossen, uns persönlich zu treffen. Seit diesem unvergesslichen ersten Date waren wir unzertrennlich und begannen, gemeinsam unsere Geschichte zu schreiben.',
+    ourJourneys: 'Unsere Reisen',
+    ourJourneysDate: 'Januar 2024',
+    ourJourneysDesc:
+      'Kurz nachdem wir angefangen hatten, uns zu treffen, lief einer unserer Arbeitsverträge aus, was zu einer Rückkehr nach Europa führte und uns in eine Fernbeziehung versetzte.\nDoch noch vor dem Umzug nach Japan unternahmen wir gemeinsam eine unvergessliche Reise durch Europa und schufen so viele schöne Erinnerungen. Das hat uns wirklich noch näher zusammengebracht.',
+    proposal: 'Der Heiratsantrag',
+    proposalDate: 'September 2025',
+    proposalDesc:
+      'Der wichtigste und kostbarste Moment unseres Lebens. Der Tag, an dem wir uns versprachen, für immer zusammen zu bleiben, und beschlossen, unsere Zukunft Seite an Seite zu gestalten. Jetzt freuen wir uns riesig darauf, dieses wunderschöne neue Kapitel gemeinsam zu beginnen.',
   },
   nl: {
     tapToOpen: 'Tik om het gordijn te openen',
     weCelebrate: 'We vieren ons huwelijk',
+    date: '12-13 Oktober 2027',
+    saveDate: 'noteer de datum alvast',
     days: 'dagen',
     hours: 'uur',
     minutes: 'min',
@@ -357,10 +417,13 @@ export const translations: Record<Lang, Record<string, string>> = {
     addToCalendar: 'Toevoegen aan Google Agenda',
     whereTitle: 'Locatie',
     getDirections: 'Routebeschrijving',
+    byCar: 'Met de auto',
+    byCarExit: '1 uur rijden van Parijs (afrit 17 Gaillon)',
+    byTrain: 'Met de trein',
+    trainStop: 'Naar station Gaillon-Aubevoye',
     dressCodeLabel: 'Kledingvoorschrift',
     dressCodeTitle: 'Dresscode',
-    dressCodeText:
-      'Geen strikte kledingvoorschriften, maar we zouden het geweldig vinden als je aansluit bij ons kleurenpalet: marineblauw, bordeauxrood en goud. Vermijd graag wit.',
+    dressCodeText: 'Geen strikte kledingvoorschriften.',
     rsvpLabel: 'RSVP',
     findInviteTitle: 'Vind je uitnodiging',
     findInviteSubtitle: 'Typ je naam om je aanwezigheid te bevestigen.',
@@ -394,38 +457,50 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: 'Bruidspersoneel',
     suggestedColors: 'Aanbevolen kleuren voor gasten',
     weddingColors: 'Gecoördineerde tinten voor het bruidspersoneel',
-    ladiesGuide: 'Gids voor dames',
-    ladiesDressCode:
-      'Omdat het bruidspaar en het bruidspersoneel uniek gekleed gaan in effen Wit, Nachtblauw en Bordeauxrood, vragen we onze lieve dames vriendelijk om wit, crème of te lichte pasteltinten volledig te vermijden. In plaats daarvan moedigen we rijke, opvallende opties ten zeerste aan, zoals Warm Taupe, Gouden accenten of diepe stoffen in de kleur stoffig cederhout.',
-    gentlemenGuide: 'Gids voor heren',
-    gentlemenDressCode:
-      'We raden aan om te kiezen voor un klassiek zwart of een verfijnd, ingetogen leisteen-/antracietgrijs formeel pak. Aangezien de bruidegom en de getuigen gecoördineerde nachtblauwe pakken dragen, verzoeken we u vriendelijk om colberts in marineblauw of bordeauxrood te vermijden, zodat het bruidspersoneel mooi herkenbaar blijft.',
+    ladiesMenGuide: 'Kledingvoorschriften voor dames en heren',
+    ladiesMenDressCode:
+      'Aangezien het bruidspaar en het bruidsgezelschap gekleed gaan in wit, nachtblauw en bordeauxrood, raden wij u aan te kiezen voor donkerdere, elegante tinten en deze drie kleuren te vermijden, om de visuele harmonie van het bruidsgezelschap te behouden.',
     bridesmaids: 'Bruidsmeisjes',
     bridesmaidsDressCode:
-      'Onze prachtige bruidsmeisjes zullen gecoördineerde, vloerlange jurken dragen in de kleur Saliegroen, passend bij de romantische en natuurlijke bloemenesthetiek van de ceremonie.',
-    groomsmen: 'Jonkers / Getuigen van de bruidegom',
+      'Onze prachtige bruidsmeisjes zullen elegante Satin Gold-jurken dragen, die perfect aansluiten bij de bloemrijke en verfijnde sfeer van de ceremonie.',
+    groomsmen: 'Bruidsjonkers',
     groomsmenAttire:
-      'De getuigen zullen er stijlvol uitzien in op elkaar afgestemde marineblauwe pakken, gecombineerd met bijpassende bordeauxrode vlinderdassen en pochets voor een elegant, contrastrijk geheel.',
+      'De getuigen van de bruidegom zullen er bijzonder elegant uitzien in hun marineblauwe kostuums, geaccentueerd door bordeauxrode accessoires, waardoor een perfect geheel ontstaat met elegante contrasten.',
     giftLabel: 'Cadeautip',
     giftTitle: 'Cadeauwensen',
     giftDescription:
-      'Uw aanwezigheid op onze bruiloft is voor ons het allermooiste geschenk. Mocht u ons toch willen eren met een cadeau, dan stellen wij een financiële bijdrage aan ons toekomstige huis en onze huwelijksreis enorm op prijs.',
+      'Uw aanwezigheid op onze bruiloft is het mooiste cadeau. Mocht u ons toch een plezier willen doen door een geschenk te geven, dan zullen wij dit met onze oprechte dankbaarheid in ontvangst nemen.',
     dietaryNotes: 'Dieetwensen & Opmerkingen',
     dietaryPlaceholder:
       'bijv. Vegetarisch, notenallergie, geen schaaldieren, etc...',
-    transportQuestion: 'Heeft u vervoer nodig?',
-    transportDesc:
-      'Vink dit aan als u van plan bent gebruik te maken van de gezamenlijke pendeldienst.',
+    transportQuestion: 'Met welk voertuig kom je aan?',
     accommodationTitle: 'Heeft u een overnachting nodig?',
     accommodationDesc:
       'Helpt ons bij het coördineren van de kamerindeling en het plannen van de overnachtingen voor onze gasten.',
     speechTitle: 'Wilt u een toespraak houden of een toost uitbrengen?',
     speechDesc:
       'Helpt ons bij het coördineren van het programma en het plannen van de microfoonmomenten.',
+    child: 'Kind',
+    beautifulJourney: 'Onze prachtige reis',
+    loveStoryTitle: 'Ons liefdesverhaal',
+    firstMeeting: 'Eerste ontmoeting',
+    firstMeetingDate: 'Juli 2023',
+    firstMeetingDesc:
+      'We hebben elkaar voor het eerst ontmoet op OkCupid en hebben ongeveer een maand lang berichten uitgewisseld voordat we besloten om elkaar in juli persoonlijk te ontmoeten. Sinds die onvergetelijke eerste date zijn we onafscheidelijk geworden en zijn we samen ons verhaal gaan schrijven.',
+    ourJourneys: 'Onze reizen',
+    ourJourneysDate: 'Januari 2024',
+    ourJourneysDesc:
+      'Niet lang nadat we met elkaar uitgingen, liep een van onze arbeidscontracten af, waardoor we terug moesten naar Europa en een langeafstandsrelatie kregen.\nMaar voordat we naar Japan verhuisden, maakten we samen een onvergetelijke reis door Europa en hebben we zoveel mooie herinneringen opgebouwd. Het heeft ons echt nog dichter bij elkaar gebracht.',
+    proposal: 'Het aanzoek',
+    proposalDate: 'September 2025',
+    proposalDesc:
+      'Het belangrijkste en kostbaarste moment van ons leven. De dag waarop we beloofden voor altijd samen te blijven en besloten om onze toekomst zij aan zij op te bouwen. Nu kijken we er enorm naar uit om samen aan dit prachtige nieuwe hoofdstuk te beginnen.',
   },
   yue: {
     tapToOpen: '輕觸拉開帷幕',
     weCelebrate: '我哋大喜之日',
+    date: '2027 年 10 月 12 日至 13 日',
+    saveDate: '記低呢日',
     days: '日',
     hours: '小時',
     minutes: '分鐘',
@@ -433,10 +508,13 @@ export const translations: Record<Lang, Record<string, string>> = {
     addToCalendar: '加入 Google 日曆',
     whereTitle: '地點',
     getDirections: '睇路線',
+    byCar: '開車',
+    byCarExit: '由巴黎開車約一小時(17號出口,Gaillon)',
+    byTrain: '上火車',
+    trainStop: 'Gaillon-Aubevoye去車站',
     dressCodeLabel: '服飾指引',
     dressCodeTitle: '著裝要求',
-    dressCodeText:
-      '冇嚴格嘅要求，不過如果你哋著嘅衫可以配合我哋嘅主題色系就更好喇：海軍藍、酒紅同金色。麻煩唔好著白色。',
+    dressCodeText: '冇嚴格嘅要求。',
     rsvpLabel: 'RSVP',
     findInviteTitle: '搵返你嘅請帖',
     findInviteSubtitle: '輸入你嘅名確認出席。',
@@ -467,30 +545,41 @@ export const translations: Record<Lang, Record<string, string>> = {
     weddingParty: '兄弟姊妹團',
     suggestedColors: '建議賓客著配顏色',
     weddingColors: '兄弟姊妹團統一色調',
-    ladiesGuide: '女士穿著指南',
-    ladiesDressCode:
-      '由於新人和兄弟姊妹團將會着獨特嘅純白、午夜藍同埋酒紅色禮服，我哋懇請咁多位靚太同靚女們，盡量避免着任何白色、米色或者過淺嘅粉色系（Pastel tones）。相反，我哋強烈建議大家選擇一啲高貴奪目嘅顏色，例如溫暖灰褐色（Warm Taupe）、帶有金色點綴嘅穿搭，或者深粉樟木色（Deep dusty cedar）嘅布料。',
-    gentlemenGuide: '男士穿著指南',
-    gentlemenDressCode:
-      '我哋建議各位男士選擇經典嘅黑色，或者高雅內斂嘅石板灰/炭灰色正裝西裝。由於新郎同兄弟團將會統一着上午夜藍色西裝，為咗確保新郎兄弟團嘅造型明亮突出，懇請大家避免着深藍色或者酒紅色嘅西裝外套。',
-    bridesmaids: '姊妹團',
+    ladiesMenGuide: '女士及先生着裝指引',
+    ladiesMenDressCode:
+      '鑑於新娘、新郎及婚禮隊伍將着白色、深邃藍色及酒紅色,我們鼓勵您選擇較深色調及更優雅的款式,並避免以上三種顏色,以維持婚禮隊伍的視覺和諧。',
+    bridesmaids: '伴娘',
     bridesmaidsDressCode:
-      '我哋美麗嘅姊妹團將會着上統一色調嘅鼠尾草綠（Sage Green）拖地長裙，以配合婚禮浪漫而自然嘅花卉美學。',
-    groomsmen: '兄弟團',
+      '我哋靚麗嘅伴娘會著上優雅嘅絲緞金色禮服,完美襯托出婚禮典禮嘅高雅花卉美學。',
+    groomsmen: '伴郎',
     groomsmenAttire:
-      '伴郎團將身穿統一的深藍色（Navy Blue）西裝，搭配同色系的酒紅色（Burgundy）領結与口袋巾，展現出高對比度且極具層次感的優雅風采。',
+      '新郎嘅伴郎團著上深 navy 藍西裝,配搭酒紅色配飾,顯得特別優雅,營造出完美嘅時尚對比。',
     giftLabel: '賀礼',
     giftTitle: '賀禮與祝福',
     giftDescription:
-      '對我們而言，您能親臨婚禮便是最珍貴的禮物。但如果您仍心意送上一份祝福，我們將不勝感激您能為我們未來的溫馨新居及蜜月基金增添一份支持與心意。',
+      '您能出席我們的婚禮,就是最好的禮物。如您仍欲送上禮物,我們將衷心感激。',
     dietaryNotes: '飲食要求与備註',
     dietaryPlaceholder: '例如：素食、堅果過敏、不吃海鮮等...',
-    transportQuestion: '您需要接送服務嗎？',
-    transportDesc: '如果您計劃使用我們提供的集體接送巴士服務，請勾選此項。',
+    transportQuestion: '你會搭邊架車嚟?',
     accommodationTitle: '您需要安排過夜住宿嗎？',
     accommodationDesc:
       '這將有助於我們為各位親友提前規劃和協調婚禮現場的客房與住宿安排。',
     speechTitle: '您想在婚宴上致辭或祝酒嗎？',
     speechDesc: '這將有助於我們合理規劃婚宴流程並為您提前預留麥克風致辭時段。',
+    child: '細路',
+    beautifulJourney: '我哋嘅美好旅程',
+    loveStoryTitle: '我哋嘅愛情故事',
+    firstMeeting: '第一次見面',
+    firstMeetingDate: '2023年7月',
+    firstMeetingDesc:
+      '我哋係OkCupid識嘅,交換訊息差唔多一個月,先至喺七月決定見面。自從嗰次難忘嘅第一次約會之後,我哋就形影不離,一齊開始寫我哋嘅故事。',
+    ourJourneys: '我哋嘅旅程',
+    ourJourneysDate: '2024年1月',
+    ourJourneysDesc:
+      '拍拖唔耐之後,我其中一份工作合約到期,要返歐洲,結果我哋變咗長距離戀愛。\n不過,去日本之前,我哋一齊去咗歐洲旅行,嗰次旅程好難忘,製造咗好多美好回憶。呢次旅行真係令我哋更加親密。',
+    proposal: '求婚',
+    proposalDate: ' 2025年9月',
+    proposalDesc:
+      '我哋生命中最重要同最珍貴嘅一刻。嗰日我哋承諾永遠一齊,決定攜手共築未來。而家,我哋好興奮可以一齊展開呢個美麗嘅新章節。',
   },
 };

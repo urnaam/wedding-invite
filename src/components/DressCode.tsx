@@ -32,9 +32,9 @@ const guestSwatches = [
 // ГЭРЧҮҮДЭД ЗОРИУЛСАН СҮҮДЭРТҮҮД
 const partySwatches = [
   {
-    color: wedding.colors.sage,
-    labelMn: 'Sage Green (Гэрч эмэгтэй даашинз)',
-    labelEn: 'Sage Green (Bridesmaids)',
+    color: wedding.colors.satinGold,
+    labelMn: 'Satin Gold (Гэрч эмэгтэй даашинз)',
+    labelEn: 'Satin Gold (Bridesmaids)',
   },
   {
     color: wedding.colors.navy,
@@ -159,36 +159,25 @@ export default function DressCode() {
         <AnimatePresence mode="wait">
           {activeTab === 'guests' ? (
             <motion.div
-              key="guests-strict-exclusion"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="p-6 sm:p-8 rounded-2xl border border-[#C9A227]/20 bg-[#142038]/50 shadow-lg backdrop-blur-sm"
             >
-              {/* ЭМЭГТЭЙ ЗОЧИД */}
-              <div className="p-6 rounded-2xl border border-white/5 bg-[#142038]/40 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xl">✨</span>
-                  <h3 className="font-display text-2xl italic text-[#C9A227]">
-                    {t('ladiesGuide')}
-                  </h3>
-                </div>
-                <p className="text-sm leading-relaxed text-[#F6F1EA]/80 font-light">
-                  {t('ladiesDressCode')}
-                </p>
+              {/* Нэгтгэсэн гарчиг: Ladies & Gentlemen */}
+              <div className="flex items-center justify-center gap-3 mb-6 border-b border-[#C9A227]/15 pb-4">
+                <span className="text-xl sm:text-2xl">✨</span>
+                <h3 className="font-display text-2xl sm:text-3xl italic text-[#C9A227] tracking-wide text-center">
+                  {t('ladiesMenGuide')}
+                </h3>
+                <span className="text-xl sm:text-2xl">🤵</span>
               </div>
 
-              {/* ЭРЭГТЭЙ ЗОЧИД */}
-              <div className="p-6 rounded-2xl border border-white/5 bg-[#142038]/40 shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xl">🤵</span>
-                  <h3 className="font-display text-2xl italic text-[#C9A227]">
-                    {t('gentlemenGuide')}
-                  </h3>
-                </div>
-                <p className="text-sm leading-relaxed text-[#F6F1EA]/80 font-light">
-                  {t('gentlemenDressCode')}
+              {/* Дресскодын нэгтгэсэн тайлбарууд */}
+              <div className="space-y-4 text-center">
+                <p className="text-sm sm:text-base leading-relaxed text-[#F6F1EA]/90 font-light">
+                  {t('ladiesMenDressCode')}
                 </p>
               </div>
             </motion.div>

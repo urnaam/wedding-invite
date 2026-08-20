@@ -36,7 +36,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const lang = mounted ? langState : DEFAULT_LANG;
-  console.log('lang:::', lang);
 
   function setLang(l: Lang) {
     setLangState(l);
