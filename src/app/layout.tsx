@@ -51,6 +51,11 @@ const script = Great_Vibes({
 export const metadata: Metadata = {
   title: 'Wedding invitation',
   description: 'Wedding invitation & RSVP',
+  icons: {
+    icon: '/ring.avif', // Default fallback icon
+    shortcut: '/ring.avif',
+    apple: '/ring.avif', // Apple touch icon for mobile home screens
+  },
 };
 export default function RootLayout({
   children,
