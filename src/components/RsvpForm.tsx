@@ -101,7 +101,7 @@ export default function RsvpForm({ slug }: { slug: string }) {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 bg-navy text-[#F6F1EA]">
+      <div className="flex flex-col items-center justify-center py-10 bg-navy text-[#F6F1EA]">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}

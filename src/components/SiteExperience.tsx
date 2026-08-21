@@ -49,11 +49,7 @@ export default function SiteExperience({
         <LocationSection />
         <DressCode />
         <GiftSection />
-        {slug && (
-          <section className="px-6 py-24">
-            <RsvpForm slug={slug} />
-          </section>
-        )}
+        {slug && <RsvpForm slug={slug} />}
         <Footer />
       </main>
       {/* <MusicToggle ref={musicRef} /> */}

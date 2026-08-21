@@ -17,7 +17,7 @@ export default function Hero() {
       min-h-screen ашиглан урилгын дэлгэцийг дүүрэн болгож,
       контент уртсах үед доошоо чөлөөтэй scroll хийх боломжийг олгоно.
     */
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden px-4 text-center bg-[#1B2A4A] text-[#F6F1EA] selection:bg-[#C9A227] selection:text-[#1B2A4A]">
+    <section className="relative flex min-h-[100svh] w-full flex-col items-center justify-center overflow-x-clip px-4 text-center ...">
       {/* 1. ЗҮҮН ДООД БУЛАНГИЙН АЛТАН ЦЭЦЭГ */}
       <svg
         className="absolute -bottom-6 -left-8 w-36 h-36 sm:w-48 sm:h-48 pointer-events-none z-10 opacity-80"
