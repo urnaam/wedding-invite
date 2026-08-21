@@ -229,7 +229,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     hours: 'heures',
     minutes: 'min',
     seconds: 'sec',
-    saveDate: 'réservez la date',
+    saveDate: 'Réservez la date',
     addToCalendar: 'Ajouter à Google Agenda',
     whereTitle: 'Lieu',
     getDirections: 'Itinéraire',
