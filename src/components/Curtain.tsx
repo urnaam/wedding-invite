@@ -178,33 +178,242 @@ export default function Curtain({ children, onOpen }: CurtainProps) {
               <motion.button
                 onClick={handleOpenSequence}
                 aria-label="Open invitation envelope"
-                className="absolute w-16 h-16 bg-[#C9A227] rounded-full z-40 shadow-[0_8px_24px_rgba(0,0,0,0.55),inset_0_2px_4px_rgba(255,255,255,0.4)] flex items-center justify-center cursor-pointer group focus:outline-none"
+                className="absolute z-40 cursor-pointer focus:outline-none flex items-center justify-center p-0 border-none bg-transparent"
                 animate={{
-                  scale: isOpen ? 0 : [1, 1.03, 1],
+                  scale: isOpen ? 0 : [1, 1.04, 1],
                 }}
                 transition={{
                   scale: isOpen
                     ? { duration: 0.25 }
                     : { repeat: Infinity, duration: 2.2, ease: 'easeInOut' },
                 }}
-                whileHover={{ scale: 1.06 }}
+                whileHover={{ scale: 1.08 }}
               >
-                {/* Лааны жигд бус ирмэгийг дуурайлгасан гоёмсог угалз */}
-                <div className="absolute inset-0 w-[114%] h-[110%] -left-[7%] -top-[5%] rounded-[46%_54%_44%_56%/_52%_46%_54%_46%] bg-[#C9A227] z-0 border border-black/10 shadow-[inset_0_-2px_5px_rgba(0,0,0,0.35)]" />
-
-                {/* 
-                  ЗАСАЛТ: Үлгэрийн номын угалзтай чамин хэв маягийг гаргах сонголт:
-                  Сонголт А (Хуучны үлгэрийн ном шиг): fontFamily: "'Uncial Antiqua', serif"
-                  Сонголт Б (Тансаг угалзтай хааны тамга шиг): fontFamily: "'Cinzel Decorative', serif"
-                  Доорх кодонд илүү тод 'Cinzel Decorative'-ийг шууд зааж өгсөн. Хэрэв үлгэрийн ном шиг 
-                  болгохыг хүсвэл доорх нэрийг 'Uncial Antiqua' болгож солиход л хангалттай.
-                */}
-                <span
-                  className="relative z-50 text-[#1B2A4A] font-bold text-xl tracking-wide select-none uppercase"
-                  style={{ fontFamily: "'Cinzel Decorative', serif" }}
+                <svg
+                  id="gold-wax-seal"
+                  viewBox="0 0 32 32"
+                  className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_12px_28px_rgba(0,0,0,0.65)]"
                 >
-                  {wedding.monogram[lang]}
-                </span>
+                  <defs>
+                    {/* 1. БОДИТ ЛААКНЫ ЖИГД БУС ИРМЭГИЙН ФИЛЬТЕР */}
+                    <filter id="wax-gold">
+                      <feTurbulence
+                        type="turbulence"
+                        baseFrequency="0.18"
+                        numOctaves="2"
+                        result="turbulence"
+                        seed="1701"
+                      />
+                      <feGaussianBlur
+                        in="turbulence"
+                        stdDeviation="0.6"
+                        result="turbulence"
+                      />
+                      <feMorphology
+                        in="turbulence"
+                        operator="dilate"
+                        radius="11"
+                        result="dilated"
+                      />
+                      <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="dilated"
+                        scale="3.6"
+                        result="blob"
+                      />
+                      <feGaussianBlur
+                        in="turbulence"
+                        stdDeviation="1.4"
+                        result="droplet-turbulence"
+                      />
+                      <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="droplet-turbulence"
+                        scale="90"
+                        result="droplet"
+                      />
+                      <feComposite
+                        in="droplet"
+                        in2="blob"
+                        operator="over"
+                        result="wax"
+                      />
+
+                      {/* Алтлаг Гэрэлтүүлэг болон Сүүдэртэй холих тохиргоо */}
+                      <feDropShadow
+                        in="droplet"
+                        dx="-0.3"
+                        dy="-0.3"
+                        stdDeviation="0"
+                        floodColor="#FFEAA5"
+                        floodOpacity="0.8"
+                        result="droplet-highlight"
+                      />
+                      <feDropShadow
+                        in="droplet"
+                        dx="0.3"
+                        dy="0.3"
+                        stdDeviation="0"
+                        floodColor="#4A3402"
+                        floodOpacity="0.9"
+                        result="droplet-shadow"
+                      />
+                      <feDropShadow
+                        in="blob"
+                        dx="-0.5"
+                        dy="-0.5"
+                        stdDeviation="0"
+                        floodColor="#FFEAA5"
+                        floodOpacity="0.7"
+                        result="blob-highlight"
+                      />
+                      <feDropShadow
+                        in="blob"
+                        dx="0.5"
+                        dy="0.5"
+                        stdDeviation="0"
+                        floodColor="#3A2800"
+                        floodOpacity="0.9"
+                        result="blob-shadow"
+                      />
+                      <feMerge>
+                        <feMergeNode in="droplet-shadow" />
+                        <feMergeNode in="blob-shadow" />
+                        <feMergeNode in="droplet-highlight" />
+                        <feMergeNode in="blob-highlight" />
+                        <feMergeNode in="wax" />
+                      </feMerge>
+                    </filter>
+
+                    {/* 2. ДОТОГШОО ДАРАГДСАН ДУГУЙ ХҮРЭЭНИЙ ФИЛЬТЕР */}
+                    <filter id="deboss-gold">
+                      <feDropShadow
+                        dx="-0.3"
+                        dy="-0.3"
+                        stdDeviation="0"
+                        floodColor="#3D2900"
+                      />
+                      <feDropShadow
+                        dx="0.3"
+                        dy="0.3"
+                        stdDeviation="0"
+                        floodColor="#FFECA1"
+                        floodOpacity="0.8"
+                      />
+                    </filter>
+
+                    {/* 3. ГАДАГШАА ТОВОЙСОН ТЕКСТИЙН ФИЛЬТЕР (3D Emboss) */}
+                    <filter id="emboss-gold">
+                      <feDropShadow
+                        dx="0.3"
+                        dy="0.3"
+                        stdDeviation="0"
+                        floodColor="#3D2900"
+                      />
+                      <feDropShadow
+                        dx="-0.3"
+                        dy="-0.3"
+                        stdDeviation="0"
+                        floodColor="#FFECA1"
+                        floodOpacity="0.8"
+                      />
+                    </filter>
+                  </defs>
+
+                  {/* БОДИТ ХАЙЛЖ ДАРАГДСАН АЛТАН СУУРЬ */}
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="37%"
+                    fill="#C59B27"
+                    filter="url(#wax-gold)"
+                  />
+
+                  {/* ДОТОР ТАЛЫН ДАРАГДСАН ДУГУЙ ХҮРЭЭ 1 */}
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="27%"
+                    fill="none"
+                    stroke="#B3881A"
+                    strokeWidth="0.8"
+                    filter="url(#deboss-gold)"
+                  />
+
+                  {/* ДОТОР ТАЛЫН ДАРАГДСАН ДУГУЙ ХҮРЭЭ 2 */}
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="25%"
+                    fill="none"
+                    stroke="#B3881A"
+                    strokeWidth="0.4"
+                    filter="url(#emboss-gold)"
+                  />
+
+                  {/* ТӨВ ДЭЭРХ ТОВОЙСОН МОНОГРАМ (Cinzel Decorative) */}
+                  <g filter="url(#emboss-gold)">
+                    {/* 1. Тамган дотор таарсан дугуй таранги хүрээ */}
+                    <path
+                      d="M 10 21 A 8 8 0 1 1 24 16"
+                      fill="none"
+                      stroke="#FFEAA5"
+                      strokeWidth="0.4"
+                      strokeLinecap="round"
+                    />
+
+                    {/* 2. Зүүн доод буланд байрлах жижиг нарийн навч */}
+                    <path
+                      d="M 8 20 Q 11 19 12 16 Q 10 18 8 20 M 9 22 Q 13 20 15 19 Q 12 18 9 22"
+                      fill="none"
+                      stroke="#FFEAA5"
+                      strokeWidth="0.35"
+                      strokeLinecap="round"
+                    />
+
+                    {/* 3. Дээд талын "U" үсэг (Зүүн дээд талд) */}
+                    <text
+                      x="40%"
+                      y="40%"
+                      dominantBaseline="middle"
+                      textAnchor="middle"
+                      fill="#FFEAA5"
+                      fontFamily="'Playfair Display', 'Cinzel', serif"
+                      fontSize="5.5"
+                      fontWeight="600"
+                    >
+                      U
+                    </text>
+
+                    {/* 4. Голын Угалзарсан "&" тэмдэг */}
+                    <text
+                      x="50%"
+                      y="51%"
+                      dominantBaseline="middle"
+                      textAnchor="middle"
+                      fill="#FFEAA5"
+                      fontFamily="'Great Vibes', 'Alex Brush', cursive, serif"
+                      fontSize="6.5"
+                      fontStyle="italic"
+                    >
+                      &
+                    </text>
+
+                    {/* 5. Доод талын "O" үсэг (Баруун доод талд) */}
+                    <text
+                      x="60%"
+                      y="62%"
+                      dominantBaseline="middle"
+                      textAnchor="middle"
+                      fill="#FFEAA5"
+                      fontFamily="'Playfair Display', 'Cinzel', serif"
+                      fontSize="5.5"
+                      fontWeight="600"
+                    >
+                      O
+                    </text>
+                  </g>
+                </svg>
               </motion.button>
             </div>
 

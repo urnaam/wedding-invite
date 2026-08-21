@@ -2,13 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Curtain from '@/components/Curtain';
-import MusicToggle, { MusicHandle } from '@/components/MusicToggle';
-// import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Hero from '@/components/Hero';
 import Countdown from '@/components/Countdown';
 import LocationSection from '@/components/LocationSection';
 import DressCode from '@/components/DressCode';
-import FindInvite from '@/components/FindInvite';
 import LoveStory from '@/components/LoveStory';
 import ScheduleSection from '@/components/ScheduleSection';
 import RsvpForm from '@/components/RsvpForm';
@@ -34,7 +31,6 @@ export default function SiteExperience({
   slug,
   initialLang,
 }: SiteExperienceProps) {
-  const musicRef = useRef<MusicHandle>(null);
   const { suggestLang } = useLanguage();
 
   useEffect(() => {
@@ -44,8 +40,7 @@ export default function SiteExperience({
   }, [initialLang, suggestLang]);
 
   return (
-    <Curtain onOpen={() => musicRef.current?.play()}>
-      {/* <LanguageSwitcher /> */}
+    <Curtain>
       <main className="bg-navy">
         <Hero />
         <Countdown />
@@ -54,12 +49,10 @@ export default function SiteExperience({
         <LocationSection />
         <DressCode />
         <GiftSection />
-        {slug ? (
+        {slug && (
           <section className="px-6 py-24">
             <RsvpForm slug={slug} />
           </section>
-        ) : (
-          <FindInvite />
         )}
         <Footer />
       </main>

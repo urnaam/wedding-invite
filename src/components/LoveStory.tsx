@@ -7,7 +7,6 @@ import { useLanguage } from '@/i18n/LanguageContext';
 export default function StorySection() {
   const { t, lang } = useLanguage();
 
-  // Хайрын түүхийн өгөгдөл (Зургийн замууд таны public/images/ хавтаснаас уншигдана)
   const timelineEvents = [
     {
       id: 1,
@@ -20,7 +19,7 @@ export default function StorySection() {
       id: 2,
       date: 'ourJourneysDate',
       title: 'ourJourneys',
-      text: `ourJourneysDesc`,
+      text: 'ourJourneysDesc',
       imgUrl: '/journey.JPG',
     },
     {
@@ -33,147 +32,222 @@ export default function StorySection() {
   ];
 
   return (
-    <section className="w-full bg-[#1B2A4A] text-[#F6F1EA] py-24 px-4 sm:px-6 relative overflow-hidden font-sans">
-      <div className="max-w-5xl mx-auto relative">
-        {/* Хэсгийн дээд гарчиг */}
-        <div className="text-center mb-16 relative z-10">
-          <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-[#C9A227] font-light mb-3">
-            {lang === 'mn'
-              ? 'Бидний нандин дурсамжууд'
-              : 'Our Beautiful Journey'}
-          </p>
-          <h2
-            className="text-3xl sm:text-5xl font-normal text-[#F6F1EA]"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+    <section className="relative w-full bg-navy text-[#F6F1EA] py-20 px-4 sm:px-6 overflow-hidden">
+      {/* 1. ЗҮҮН ДООД БУЛАНГИЙН АЛТАН ЦЭЦЭГ */}
+      <svg
+        className="absolute -bottom-6 -left-8 w-36 h-36 sm:w-48 sm:h-48 pointer-events-none z-10 opacity-80"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          stroke="#D4AF37"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M10 90 Q30 70 45 45 T70 15" />
+          <path d="M25 75 Q40 55 50 30" />
+          <path
+            d="M45 45 C35 35 25 40 20 50 C25 55 35 55 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C40 30 50 20 60 25 C60 35 52 42 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C55 40 65 50 55 60 C48 58 46 50 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path d="M28 47 Q35 45 45 45" strokeWidth="0.4" />
+          <path d="M48 28 Q46 38 45 45" strokeWidth="0.4" />
+          <path d="M54 53 Q49 50 45 45" strokeWidth="0.4" />
+          <path d="M70 15 C65 8 72 2 78 5 C80 12 75 16 70 15 Z" />
+          <path d="M70 15 C75 20 82 18 85 10 C78 8 73 11 70 15 Z" />
+        </g>
+      </svg>
+
+      {/* 2. БАРУУН ДЭЭД БУЛАНГИЙН АЛТАН ЦЭЦЭГ */}
+      <svg
+        className="absolute -top-6 -right-8 w-36 h-36 sm:w-48 sm:h-48 pointer-events-none z-10 opacity-80 rotate-180"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          stroke="#D4AF37"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M10 90 Q30 70 45 45 T70 15" />
+          <path d="M25 75 Q40 55 50 30" />
+          <path
+            d="M45 45 C35 35 25 40 20 50 C25 55 35 55 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C40 30 50 20 60 25 C60 35 52 42 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C55 40 65 50 55 60 C48 58 46 50 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path d="M28 47 Q35 45 45 45" strokeWidth="0.4" />
+          <path d="M48 28 Q46 38 45 45" strokeWidth="0.4" />
+          <path d="M54 53 Q49 50 45 45" strokeWidth="0.4" />
+          <path d="M70 15 C65 8 72 2 78 5 C80 12 75 16 70 15 Z" />
+          <path d="M70 15 C75 20 82 18 85 10 C78 8 73 11 70 15 Z" />
+        </g>
+      </svg>
+
+      <div className="max-w-5xl mx-auto relative z-20">
+        {/* ХЭСГИЙН ДЭЭД ГАРЧИГ */}
+        <div className="flex flex-col items-center text-center mb-16">
+          {/* ҮНДСЭН ГАРЧГИЙН ДЭЭД АЛТАН ЦЭЦГЭН ХЭЭ */}
+          <svg
+            className="w-20 h-8 sm:w-24 sm:h-10 text-[#D4AF37] opacity-90 mb-1"
+            viewBox="0 0 100 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {lang === 'mn' ? 'Хайрын Түүх' : 'Our Love Story'}
-          </h2>
-          <div className="w-16 h-px bg-[#C9A227]/40 mx-auto mt-4" />
+            <g
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M50 35 Q50 15 50 5" />
+              <path
+                d="M50 20 C40 10 20 15 15 25 C25 28 38 25 50 20 Z"
+                fill="currentColor"
+                fillOpacity="0.1"
+              />
+              <path
+                d="M50 20 C60 10 80 15 85 25 C75 28 62 25 50 20 Z"
+                fill="currentColor"
+                fillOpacity="0.1"
+              />
+              <path
+                d="M50 12 C42 5 30 8 28 15 C36 17 44 15 50 12 Z"
+                fill="currentColor"
+                fillOpacity="0.1"
+              />
+              <path
+                d="M50 12 C58 5 70 8 72 15 C64 17 56 15 50 12 Z"
+                fill="currentColor"
+                fillOpacity="0.1"
+              />
+              <circle cx="50" cy="5" r="2.5" fill="currentColor" />
+            </g>
+          </svg>
+
+          <span className="font-serif italic text-2xl sm:text-4xl tracking-wider text-[#D4AF37]">
+            {t('loveStoryTitle')}
+          </span>
+
+          {/* ХЯЗГААРГҮЙН ТЭМДЭГТЭЙ ЗУРААС */}
+          <div className="flex items-center justify-center w-full max-w-xs my-3 gap-4">
+            <div className="h-[1px] flex-1 bg-[#D4AF37]/30" />
+            <span className="text-[#D4AF37]/70 text-base font-serif">∞</span>
+            <div className="h-[1px] flex-1 bg-[#D4AF37]/30" />
+          </div>
+
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#F6F1EA]/70 mt-1 font-medium">
+            {t('beautifulJourney')}
+          </p>
         </div>
 
-        {/* 
-          ГӨЛ ДУНДУУР ГҮЙХ МИНИМАЛИСТ ТЭНХЛЭГИЙН ШУГАМ 
-          ЗАСАЛТ: Дээр нь ямар нэгэн бичвэртэй дугуй давхцахгүй тул цэвэрхэн нарийн шугам байх болно.
-        */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-32 bottom-0 w-px bg-gradient-to-b from-[#C9A227]/10 via-[#C9A227]/40 to-transparent hidden md:block" />
+        {/* ГОЛ ДУНДУУР ГҮЙХ НАРИЙН АЛТАН ШУГАМ */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-44 bottom-12 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37]/30 to-transparent hidden md:block" />
 
-        {/* ДУРСАМЖУУДЫН ЖАГСААЛТ БЛОК */}
-        <div className="space-y-16 md:space-y-24 relative z-10">
+        {/* ДУРСАМЖУУДЫН ЖАГСААЛТ */}
+        <div className="space-y-16 md:space-y-24 relative">
           {timelineEvents.map((event, idx) => {
             const isEven = idx % 2 === 1;
             return (
               <div
                 key={event.id}
-                className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 w-full ${
+                className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 w-full ${
                   isEven ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                {/* ЗҮҮН/БАРУУН ТАЛ: ЗУРГИЙН ХЭСЭГ */}
+                {/* ЗУРГИЙН ХЭСЭГ (Яг таарч багтах жаазтай) */}
                 <motion.div
-                  initial={{ opacity: 0, x: isEven ? 30 : -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.8 }}
-                  /* Great Gatsby Art Deco тэгш өнцөгт жааз ба гүн сүүдэр */
-                  className="w-full md:w-[46%] aspect-[4/3] sm:aspect-[16/10] bg-[#0c1322] border-2 border-[#C9A227]/60 p-3 sm:p-4 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_15px_rgba(201,162,39,0.15)]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.7 }}
+                  className="w-full md:w-[48%] relative group"
                 >
-                  {/* Дотор талын давхар Art Deco нарийхан алтан шугамууд */}
-                  <div className="absolute inset-1.5 border border-[#C9A227]/30 pointer-events-none z-20" />
-                  <div className="absolute inset-2.5 border border-[#C9A227]/15 pointer-events-none z-20" />
-
-                  {/* Art Deco Булангийн геометрийн хурц өнцөгт алтан хээнүүд */}
-                  {[
-                    { align: 'top-1 left-1', transform: '' },
-                    { align: 'top-1 right-1', transform: 'scaleX(-1)' },
-                    { align: 'bottom-1 left-1', transform: 'scaleY(-1)' },
-                    { align: 'bottom-1 right-1', transform: 'scale(-1, -1)' },
-                  ].map((item, index) => (
-                    <svg
-                      key={index}
-                      className={`absolute w-7 h-7 sm:w-10 sm:h-10 stroke-[#C9A227] fill-none stroke-[1.2] z-30 pointer-events-none ${item.align}`}
-                      style={{ transform: item.transform }}
-                      viewBox="0 0 50 50"
-                    >
-                      <path
-                        d="M 0,0 L 20,0 L 20,4 L 4,4 L 4,20 L 0,20 Z"
-                        className="fill-[#C9A227]/30 stroke-none"
+                  <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border border-[#D4AF37]/40 p-2 bg-[#121D33] shadow-2xl transition-all duration-500 group-hover:border-[#D4AF37]/80">
+                    <div className="w-full h-full overflow-hidden rounded relative flex items-center justify-center bg-black/20">
+                      <img
+                        src={event.imgUrl}
+                        alt={t(event.title)}
+                        className="w-full h-full object-cover object-center opacity-90 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
                       />
-                      <path d="M 0,0 L 32,0 L 32,2 L 2,2 L 2,32 L 0,32 Z" />
-                      <path d="M 8,8 L 24,8 L 24,10 L 10,10 L 10,24 L 8,24 Z" />
-                      <polygon
-                        points="18,18 24,12 18,6 12,12"
-                        className="fill-[#C9A227]/50 stroke-none"
-                      />
-                      <circle
-                        cx="18"
-                        cy="18"
-                        r="1.5"
-                        className="fill-[#C9A227] stroke-none"
-                      />
-                    </svg>
-                  ))}
+                    </div>
 
-                  {/* Дээд ба Доод талын Төв Art Deco Чимэглэл (Gatsby Crown Ornament) */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                    <svg
-                      className="w-16 h-4 sm:w-20 sm:h-5 stroke-[#C9A227] fill-none stroke-[1]"
-                      viewBox="0 0 100 25"
-                    >
-                      <path d="M 0,0 L 35,0 L 50,15 L 65,0 L 100,0" />
-                      <polygon
-                        points="50,4 57,13 50,22 43,13"
-                        className="fill-[#C9A227]/30 stroke-[#C9A227]"
-                      />
-                    </svg>
-                  </div>
-
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-                    <svg
-                      className="w-16 h-4 sm:w-20 sm:h-5 stroke-[#C9A227] fill-none stroke-[1]"
-                      viewBox="0 0 100 25"
-                    >
-                      <path d="M 0,25 L 35,25 L 50,10 L 65,25 L 100,25" />
-                      <polygon
-                        points="50,21 57,12 50,3 43,12"
-                        className="fill-[#C9A227]/30 stroke-[#C9A227]"
-                      />
-                    </svg>
-                  </div>
-
-                  {/* Зургийн контейнер */}
-                  <div className="w-full h-full relative overflow-hidden bg-[#090e1a]">
-                    {/* Дотоод сүүдэр */}
-                    <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.85)] z-10 pointer-events-none" />
-
-                    {/* Зураг */}
-                    <img
-                      src={event.imgUrl}
-                      alt={t(event.title)}
-                      className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-104 transition-all duration-700 ease-out"
-                    />
-                  </div>
-
-                  {/* Огнооны хүрээ (Gatsby хэв маягийн хурц өнцөгтэй) */}
-                  <div className="absolute top-5 left-5 bg-[#121d33]/90 text-[#C9A227] text-[10px] sm:text-xs font-medium uppercase tracking-widest px-3 py-1.5 border border-[#C9A227]/50 shadow-md font-sans-clean z-30 pointer-events-none">
-                    {t(event.date)}
+                    {/* Огноо */}
+                    <div className="absolute top-4 left-4 bg-[#121D33]/90 text-[#D4AF37] text-[10px] sm:text-xs font-serif italic px-3 py-1 border border-[#D4AF37]/40 rounded backdrop-blur-sm z-10">
+                      {t(event.date)}
+                    </div>
                   </div>
                 </motion.div>
 
-                {/* БАРУУН/ЗҮҮН ТАЛ: ТЕКСТЭН МЭДЭЭЛЛИЙН ХЭСЭГ (Давхардал 100% арилсан) */}
+                {/* ТЕКСТЭН МЭДЭЭЛЭЛ & ГАРЧГИЙН ДЭЭД ЦЭЦЭГ */}
                 <motion.div
-                  initial={{ opacity: 0, x: isEven ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  className="w-full md:w-[46%] flex flex-col justify-center text-center md:text-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                  className={`w-full md:w-[48%] flex flex-col items-center ${
+                    isEven
+                      ? 'md:items-end md:text-right'
+                      : 'md:items-start md:text-left'
+                  } text-center`}
                 >
-                  <h3
-                    className="text-2xl sm:text-3xl font-normal text-[#C9A227] mb-4"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                  {/* ТИТЭМ/ГАРЧИГ БҮРИЙН ДЭЭД НАРИЙН ЦЭЦГЭН ХЭЭ (FLORAL ORNAMENT) */}
+                  <svg
+                    className="w-12 h-5 text-[#D4AF37]/80 mb-2"
+                    viewBox="0 0 60 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    {t(event.title)} 💍
+                    <g
+                      stroke="currentColor"
+                      strokeWidth="0.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M30 18 Q30 8 30 2" />
+                      <path
+                        d="M30 10 C24 4 12 7 9 13 C15 15 22 13 30 10 Z"
+                        fill="currentColor"
+                        fillOpacity="0.15"
+                      />
+                      <path
+                        d="M30 10 C36 4 48 7 51 13 C45 15 38 13 30 10 Z"
+                        fill="currentColor"
+                        fillOpacity="0.15"
+                      />
+                      <circle cx="30" cy="2" r="1.5" fill="currentColor" />
+                    </g>
+                  </svg>
+
+                  <h3 className="font-serif italic text-2xl sm:text-3xl text-[#D4AF37] mb-3">
+                    {t(event.title)}
                   </h3>
-                  <p className="text-sm sm:text-base leading-relaxed text-[#F6F1EA]/80 font-light max-w-xl mx-auto md:mx-0">
+                  <p className="text-sm sm:text-base leading-relaxed text-[#F6F1EA]/80 font-light max-w-xl">
                     {t(event.text)}
                   </p>
                 </motion.div>

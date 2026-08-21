@@ -18,6 +18,92 @@ export default function Hero() {
       контент уртсах үед доошоо чөлөөтэй scroll хийх боломжийг олгоно.
     */
     <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden px-4 text-center bg-[#1B2A4A] text-[#F6F1EA] selection:bg-[#C9A227] selection:text-[#1B2A4A]">
+      {/* 1. ЗҮҮН ДООД БУЛАНГИЙН АЛТАН ЦЭЦЭГ */}
+      <svg
+        className="absolute -bottom-6 -left-8 w-36 h-36 sm:w-48 sm:h-48 pointer-events-none z-10 opacity-80"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          stroke="#D4AF37"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* Ишнүүд */}
+          <path d="M10 90 Q30 70 45 45 T70 15" />
+          <path d="M25 75 Q40 55 50 30" />
+
+          {/* Том Цэцэглэг Дэлбээнүүд (Зүүн тал) */}
+          <path
+            d="M45 45 C35 35 25 40 20 50 C25 55 35 55 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C40 30 50 20 60 25 C60 35 52 42 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C55 40 65 50 55 60 C48 58 46 50 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+
+          {/* Дэлбээний нарийн зураасууд (Line-art detail) */}
+          <path d="M28 47 Q35 45 45 45" strokeWidth="0.4" />
+          <path d="M48 28 Q46 38 45 45" strokeWidth="0.4" />
+          <path d="M54 53 Q49 50 45 45" strokeWidth="0.4" />
+
+          {/* Бага Цэцэг (Дээд тал) */}
+          <path d="M70 15 C65 8 72 2 78 5 C80 12 75 16 70 15 Z" />
+          <path d="M70 15 C75 20 82 18 85 10 C78 8 73 11 70 15 Z" />
+        </g>
+      </svg>
+      {/* 2. БАРУУН ДЭЭД БУЛАНГИЙН АЛТАН ЦЭЦЭГ */}
+      <svg
+        className="absolute -top-6 -right-8 w-36 h-36 sm:w-48 sm:h-48 pointer-events-none z-10 opacity-80 rotate-180"
+        viewBox="0 0 100 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          stroke="#D4AF37"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {/* Ишнүүд */}
+          <path d="M10 90 Q30 70 45 45 T70 15" />
+          <path d="M25 75 Q40 55 50 30" />
+
+          {/* Дэлбээнүүд */}
+          <path
+            d="M45 45 C35 35 25 40 20 50 C25 55 35 55 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C40 30 50 20 60 25 C60 35 52 42 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+          <path
+            d="M45 45 C55 40 65 50 55 60 C48 58 46 50 45 45 Z"
+            fill="#D4AF37"
+            fillOpacity="0.05"
+          />
+
+          <path d="M28 47 Q35 45 45 45" strokeWidth="0.4" />
+          <path d="M48 28 Q46 38 45 45" strokeWidth="0.4" />
+          <path d="M54 53 Q49 50 45 45" strokeWidth="0.4" />
+
+          <path d="M70 15 C65 8 72 2 78 5 C80 12 75 16 70 15 Z" />
+          <path d="M70 15 C75 20 82 18 85 10 C78 8 73 11 70 15 Z" />
+        </g>
+      </svg>
       {/* Арын фон дахь уусгалтай зөөлөн бургунди гэрэлтэлт */}
       <motion.div
         className="pointer-events-none absolute -top-24 left-1/2 h-[300px] w-[300px] sm:h-[520px] sm:w-[520px] -translate-x-1/2 rounded-full bg-burgundy/10 blur-3xl"

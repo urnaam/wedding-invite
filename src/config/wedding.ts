@@ -12,18 +12,6 @@ export const wedding = {
     yue: '艺华 & 李荣',
   },
 
-  // Latin initials for the decorative script-font monogram (the curtain seal, etc.)
-  // Great_Vibes / most script fonts only support Latin glyphs, so keep this Latin
-  // regardless of site language.
-  monogram: {
-    mn: 'У&О',
-    en: 'U&O',
-    fr: 'U&O',
-    de: 'U&O',
-    nl: 'U&O',
-    yue: '艺&李',
-  },
-
   // ISO datetime, local time of the venue. Change this to your real date/time.
   dateTimeISO: '2027-10-12T12:00:00+02:00',
   durationHours: 5, // used for the Google Calendar "end time"
