@@ -21,7 +21,7 @@ export default function StorySection() {
       date: 'ourJourneysDate',
       title: 'ourJourneys',
       text: `ourJourneysDesc`,
-      imgUrl: '/journey.jpg',
+      imgUrl: '/journey.JPG',
     },
     {
       id: 3,
