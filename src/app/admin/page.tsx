@@ -51,9 +51,9 @@ export default async function AdminDashboard({
   if (speechFilter !== 'all') {
     // Үг хэлэх хүсэлтэй хүмүүсийн мессеж талбарт тусгай текст хадгалагддаг туг
     if (speechFilter === 'yes') {
-      where.message = { contains: 'үг хэлж, тост дэвшүүлэх хүсэлтэй' };
+      where.message = { contains: 'to give a speech or toast' };
     } else {
-      where.NOT = { message: { contains: 'үг хэлж, тост дэвшүүлэх хүсэлтэй' } };
+      where.NOT = { message: { contains: 'to give a speech or toast' } };
     }
   }
 
@@ -67,10 +67,10 @@ export default async function AdminDashboard({
   ]);
 
   // 📊 ҮНДСЭН СТАТИСТИК ТООЛОЛТУУД
+  const attendingGuests = allGuests.filter((g) => g.status === 'attending');
+
   const totalFamilies = allGuests.length;
-  const attendingFamilies = allGuests.filter(
-    (g) => g.status === 'attending',
-  ).length;
+  const attendingFamilies = attendingGuests.length;
   const notAttendingFamilies = allGuests.filter(
     (g) => g.status === 'not_attending',
   ).length;
@@ -78,22 +78,25 @@ export default async function AdminDashboard({
     (g) => g.status === 'pending',
   ).length;
 
-  // 👨‍👩‍👧‍👦 Нийт ирэх Том хүн болон Хүүхдийн тоог салгаж тоолох
-  const totalAdultsComing = allGuests
-    .filter((g) => g.status === 'attending')
-    .reduce(
-      (sum, g) =>
-        sum + g.members.filter((m) => m.attending && !m.isChild).length,
-      0,
+  // 👨‍👩‍👧‍👦 Ирэх том хүн, хүүхдийн тоо
+  const { adults: totalAdultsComing, children: totalChildrenComing } =
+    attendingGuests.reduce(
+      (acc, g) => {
+        // Гол урисан хүн өөрөө 1 том хүн
+        acc.adults += 1;
+
+        // Нэмсэн гишүүд: ирэх гэж тэмдэглэсэн хүн бүр
+        for (const m of g.members) {
+          if (!m.attending) continue;
+          if (m.isChild) acc.children += 1;
+          else acc.adults += 1;
+        }
+        return acc;
+      },
+      { adults: 0, children: 0 },
     );
 
-  const totalChildrenComing = allGuests
-    .filter((g) => g.status === 'attending')
-    .reduce(
-      (sum, g) =>
-        sum + g.members.filter((m) => m.attending && m.isChild).length,
-      0,
-    );
+  const totalPeopleComing = totalAdultsComing + totalChildrenComing;
 
   // 🚌 Шинэ асуулгуудын тоолуур
   const transportCount = allGuests.filter(
@@ -102,10 +105,20 @@ export default async function AdminDashboard({
   const accommodationCount = allGuests.filter(
     (g) => g.status === 'attending' && g.needsAccommodation === true,
   ).length;
+  const SPEECH_MARKERS = [
+    'үг хэлж, тост дэвшүүлэх хүсэлтэй', // mn
+    'give a speech or toast during the reception', // en
+    // TODO: nl, de, jp, yue, fr
+  ].map((m) => m.toLowerCase());
+
+  const wantsSpeech = (message?: string | null) => {
+    if (!message) return false;
+    const text = message.toLowerCase();
+    return SPEECH_MARKERS.some((m) => text.includes(m));
+  };
+
   const speechCount = allGuests.filter(
-    (g) =>
-      g.status === 'attending' &&
-      g.message?.includes('үг хэлж, тост дэвшүүлэх хүсэлтэй'),
+    (g) => g.status === 'attending' && wantsSpeech(g.message),
   ).length;
 
   const brideFamilies = allGuests.filter((g) => g.side === 'bride').length;
@@ -115,8 +128,11 @@ export default async function AdminDashboard({
   const statCards = [
     ['Total invitation', totalFamilies, 'border-gold/20'],
     ['Coming Family', attendingFamilies, 'border-gold/20'],
+    ['Not Coming', notAttendingFamilies, 'border-red-400/20'],
+    ['Pending', pendingFamilies, 'border-gold/20'],
+    ['Total People', totalPeopleComing, 'border-gold/40 text-gold'],
     ['Coming Adults', totalAdultsComing, 'border-gold/40 text-gold'],
-    ['Coming Children', totalChildrenComing, 'border-gold/40 text-gold'], // 👈 Хүүхэд тоолуур
+    ['Coming Children', totalChildrenComing, 'border-gold/40 text-gold'],
     ['Transport', transportCount, 'border-blue-400/20'],
     ['Accommodation', accommodationCount, 'border-purple-400/20'],
     ['Speech', speechCount, 'border-emerald-400/20'],
