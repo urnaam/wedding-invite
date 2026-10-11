@@ -10,6 +10,7 @@ export const wedding = {
     de: 'Urangua & Olivier',
     nl: 'Urangua & Olivier',
     yue: '艺华 & 李荣',
+    jp: 'ウラングア & オリヴィエ',
   },
 
   // ISO datetime, local time of the venue. Change this to your real date/time.
